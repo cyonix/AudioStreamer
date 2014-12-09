@@ -741,8 +741,8 @@ as the amount to fill instead.</p>
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>If this flag is set to NO, then a statically sized buffer is used as
-determined by bufferCount and bufferSize above and the read stream will be
-descheduled when those fill up. This limits the bandwidth consumed to the
+determined by the <a href="#//api/name/bufferCount">bufferCount</a> and <a href="#//api/name/bufferSize">bufferSize</a> properties and the read stream
+will be descheduled when those fill up. This limits the bandwidth consumed to the
 remote source and also limits memory usage.</p>
 
 <p>If, however, you wish to hold the entire stream in memory, then you can set
@@ -802,7 +802,7 @@ inferring of the buffer size fails, however, this is used as a fallback as
 how large each buffer should be.</p>
 
 <p>If you find that this is being used, then it should be coordinated with
-bufferCount above to make sure that the audio stays responsive and slightly
+<a href="#//api/name/bufferCount">bufferCount</a> above to make sure that the audio stays responsive and slightly
 behind the HTTP stream</p>
 
 <p>Default: 4096</p>
@@ -954,7 +954,7 @@ corresponding to the error</p>
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>This is an optional parameter. If not specified, then the file type will be
 guessed. First, the MIME type of the response is used to guess the file
-type, and if that fails the extension on the url is used. If that fails as
+type, and if that fails the extension on the <a href="#//api/name/url">url</a> is used. If that fails as
 well, then the default is an MP3 stream.</p>
 
 <p>If this property is set, then no inferring is done and that file type is
