@@ -4,16 +4,15 @@
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
 		<title>AudioStreamer Class Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
-		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
 		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
-		<meta name="generator" content="appledoc 2.0.5 (build 789)" />
+		<meta name="generator" content="appledoc 2.2 (build 963)" />
 	</head>
 	<body>
 		<header id="top_header">
 			<div id="library" class="hideInXcode">
 				<h1><a id="libraryTitle" href="../index.html">AudioStreamer </a></h1>
-				<a id="developerHome" href="../index.html">_</a>
+				<a id="developerHome" href="../index.html"> </a>
 			</div>
 			
 			<div id="title" role="banner">
@@ -40,17 +39,27 @@
 	
 	<option value="properties">Properties</option>
 	
-	<option value="//api/name/bufferCnt">&nbsp;&nbsp;&nbsp;&nbsp;bufferCnt</option>
+	<option value="//api/name/bufferCount">&nbsp;&nbsp;&nbsp;&nbsp;bufferCount</option>
+	
+	<option value="//api/name/bufferFillCountToStart">&nbsp;&nbsp;&nbsp;&nbsp;bufferFillCountToStart</option>
 	
 	<option value="//api/name/bufferInfinite">&nbsp;&nbsp;&nbsp;&nbsp;bufferInfinite</option>
 	
 	<option value="//api/name/bufferSize">&nbsp;&nbsp;&nbsp;&nbsp;bufferSize</option>
+	
+	<option value="//api/name/error">&nbsp;&nbsp;&nbsp;&nbsp;error</option>
 	
 	<option value="//api/name/errorCode">&nbsp;&nbsp;&nbsp;&nbsp;errorCode</option>
 	
 	<option value="//api/name/fileType">&nbsp;&nbsp;&nbsp;&nbsp;fileType</option>
 	
 	<option value="//api/name/httpHeaders">&nbsp;&nbsp;&nbsp;&nbsp;httpHeaders</option>
+	
+	<option value="//api/name/networkError">&nbsp;&nbsp;&nbsp;&nbsp;networkError</option>
+	
+	<option value="//api/name/playbackRate">&nbsp;&nbsp;&nbsp;&nbsp;playbackRate</option>
+	
+	<option value="//api/name/streamDescription">&nbsp;&nbsp;&nbsp;&nbsp;streamDescription</option>
 	
 	<option value="//api/name/timeoutInterval">&nbsp;&nbsp;&nbsp;&nbsp;timeoutInterval</option>
 	
@@ -76,6 +85,10 @@
 	
 	<option value="//api/name/duration:">&nbsp;&nbsp;&nbsp;&nbsp;- duration:</option>
 	
+	<option value="//api/name/fadeInDuration:">&nbsp;&nbsp;&nbsp;&nbsp;- fadeInDuration:</option>
+	
+	<option value="//api/name/fadeOutDuration:">&nbsp;&nbsp;&nbsp;&nbsp;- fadeOutDuration:</option>
+	
 	<option value="//api/name/isDone">&nbsp;&nbsp;&nbsp;&nbsp;- isDone</option>
 	
 	<option value="//api/name/isPaused">&nbsp;&nbsp;&nbsp;&nbsp;- isPaused</option>
@@ -89,6 +102,8 @@
 	<option value="//api/name/play">&nbsp;&nbsp;&nbsp;&nbsp;- play</option>
 	
 	<option value="//api/name/progress:">&nbsp;&nbsp;&nbsp;&nbsp;- progress:</option>
+	
+	<option value="//api/name/seekByDelta:">&nbsp;&nbsp;&nbsp;&nbsp;- seekByDelta:</option>
 	
 	<option value="//api/name/seekToTime:">&nbsp;&nbsp;&nbsp;&nbsp;- seekToTime:</option>
 	
@@ -134,17 +149,27 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/bufferCnt">bufferCnt</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/bufferCount">bufferCount</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/bufferFillCountToStart">bufferFillCountToStart</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/bufferInfinite">bufferInfinite</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/bufferSize">bufferSize</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/error">error</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/errorCode">errorCode</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/fileType">fileType</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/httpHeaders">httpHeaders</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/networkError">networkError</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/playbackRate">playbackRate</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/streamDescription">streamDescription</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/timeoutInterval">timeoutInterval</a></span></li>
 	
@@ -172,6 +197,10 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/duration:">duration:</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/fadeInDuration:">fadeInDuration:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/fadeOutDuration:">fadeOutDuration:</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isDone">isDone</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isPaused">isPaused</a></span></li>
@@ -185,6 +214,8 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/play">play</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/progress:">progress:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/seekByDelta:">seekByDelta:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/seekToTime:">seekToTime:</a></span></li>
 	
@@ -229,8 +260,8 @@
 </tr>
 						</tbody></table></div>
 					
-					
-					
+                    
+                    
 					
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
@@ -302,8 +333,7 @@ manager of the AudioStreamer class, but others normally indicate that the
 remote stream just won&rsquo;t work.  Occasionally errors might reflect a lack of
 local resources.</p>
 
-<p>Error information can be learned from the <a href="#//api/name/errorCode">errorCode</a> property and the
-<a href="#//api/name/stringForErrorCode:">stringForErrorCode:</a> method.</p>
+<p>Error information can be learned from the <a href="#//api/name/error">error</a> property.</p>
 
 <h2>Seeking</h2>
 
@@ -340,7 +370,6 @@ AudioStreamer objects need to be created/managed.</p>
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/streamWithURL:">+&nbsp;streamWithURL:</a></code>
-		<span class="tooltip"><p>Allocate a new audio stream with the specified <a href="#//api/name/url">url</a></p></span>
 	</span>
 	
 	
@@ -354,80 +383,97 @@ AudioStreamer objects need to be created/managed.</p>
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
+		<code><a href="#//api/name/error">&nbsp;&nbsp;error</a></code>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/errorCode">&nbsp;&nbsp;errorCode</a></code>
-		<span class="tooltip"><p>If an error occurs on the stream, then this variable is set with the code
-corresponding to the error</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/stringForErrorCode:">+&nbsp;stringForErrorCode:</a></code>
-		<span class="tooltip"><p>Converts an error code to a string</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/networkError">&nbsp;&nbsp;networkError</a></code>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/httpHeaders">&nbsp;&nbsp;httpHeaders</a></code>
-		<span class="tooltip"><p>Headers received from the remote source</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/url">&nbsp;&nbsp;url</a></code>
-		<span class="tooltip"><p>The remote resource that this stream is playing, this is a read-only property
-and cannot be changed after creation</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/bufferCnt">&nbsp;&nbsp;bufferCnt</a></code>
-		<span class="tooltip"><p>The number of audio buffers to have</p></span>
+		<code><a href="#//api/name/streamDescription">&nbsp;&nbsp;streamDescription</a></code>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/bufferCount">&nbsp;&nbsp;bufferCount</a></code>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/bufferSize">&nbsp;&nbsp;bufferSize</a></code>
-		<span class="tooltip"><p>The default size for each buffer allocated</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/bufferFillCountToStart">&nbsp;&nbsp;bufferFillCountToStart</a></code>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/fileType">&nbsp;&nbsp;fileType</a></code>
-		<span class="tooltip"><p>The file type of this audio stream</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/bufferInfinite">&nbsp;&nbsp;bufferInfinite</a></code>
-		<span class="tooltip"><p>Flag if to infinitely buffer data</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/timeoutInterval">&nbsp;&nbsp;timeoutInterval</a></code>
-		<span class="tooltip"><p>Interval to consider timeout if no network activity is seen</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/playbackRate">&nbsp;&nbsp;playbackRate</a></code>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/setHTTPProxy:port:">&ndash;&nbsp;setHTTPProxy:port:</a></code>
-		<span class="tooltip"><p>Set an HTTP proxy for this stream</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/setSOCKSProxy:port:">&ndash;&nbsp;setSOCKSProxy:port:</a></code>
-		<span class="tooltip"><p>Set SOCKS proxy for this stream</p></span>
 	</span>
 	
 	
@@ -442,65 +488,54 @@ and cannot be changed after creation</p></span>
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/start">&ndash;&nbsp;start</a></code>
-		<span class="tooltip"><p>Starts playback of this audio stream.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/stop">&ndash;&nbsp;stop</a></code>
-		<span class="tooltip"><p>Stop all streams, cleaning up resources and preventing all further events
-from occurring.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/pause">&ndash;&nbsp;pause</a></code>
-		<span class="tooltip"><p>Pause the audio stream if playing</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/play">&ndash;&nbsp;play</a></code>
-		<span class="tooltip"><p>Plays the audio stream if paused</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/isPlaying">&ndash;&nbsp;isPlaying</a></code>
-		<span class="tooltip"><p>Tests whether the stream is playing</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/isPaused">&ndash;&nbsp;isPaused</a></code>
-		<span class="tooltip"><p>Tests whether the stream is paused</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/isWaiting">&ndash;&nbsp;isWaiting</a></code>
-		<span class="tooltip"><p>Tests whether the stream is waiting</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/isDone">&ndash;&nbsp;isDone</a></code>
-		<span class="tooltip"><p>Tests whether the stream is done with all operation</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/doneReason">&ndash;&nbsp;doneReason</a></code>
-		<span class="tooltip"><p>When <a href="#//api/name/isDone">isDone</a> returns true, this will return the reason that the stream has
-been flagged as being done.</p></span>
 	</span>
 	
 	
@@ -515,35 +550,48 @@ been flagged as being done.</p></span>
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/seekToTime:">&ndash;&nbsp;seekToTime:</a></code>
-		<span class="tooltip"><p>Seek to a specified time in the audio stream</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/seekByDelta:">&ndash;&nbsp;seekByDelta:</a></code>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/calculatedBitRate:">&ndash;&nbsp;calculatedBitRate:</a></code>
-		<span class="tooltip"><p>Calculates the bit rate of the stream</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/setVolume:">&ndash;&nbsp;setVolume:</a></code>
-		<span class="tooltip"><p>Attempt to set the volume on the audio queue</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/duration:">&ndash;&nbsp;duration:</a></code>
-		<span class="tooltip"><p>Calculates the duration of the audio stream in seconds</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/progress:">&ndash;&nbsp;progress:</a></code>
-		<span class="tooltip"><p>Calculate the progress into the stream, in seconds</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/fadeInDuration:">&ndash;&nbsp;fadeInDuration:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/fadeOutDuration:">&ndash;&nbsp;fadeOutDuration:</a></code>
 	</span>
 	
 	
@@ -561,8 +609,8 @@ been flagged as being done.</p></span>
 						<h2 class="subtitle subtitle-methods">Properties</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/bufferCnt" title="bufferCnt"></a>
-	<h3 class="subsubtitle method-title">bufferCnt</h3>
+	<a name="//api/name/bufferCount" title="bufferCount"></a>
+	<h3 class="subsubtitle method-title">bufferCount</h3>
 	
 	
 	
@@ -572,7 +620,7 @@ been flagged as being done.</p></span>
 	
     
 
-	<div class="method-subsection method-declaration"><code>@property (readwrite) UInt32 bufferCnt</code></div>
+	<div class="method-subsection method-declaration"><code>@property (readwrite) UInt32 bufferCount</code></div>
 
     
 	
@@ -596,7 +644,62 @@ off, this should be a number to not consume too much memory, but to also keep
 up with the remote data stream. The incoming data should always be able to
 stay ahead of these buffers being filled</p>
 
-<p>Default: 16</p>
+<p>Higher values will mean more data is stored so the higher you go, the more you
+can go without streaming more. This can help in the case of brief network
+slowdowns. Additionally, higher bitrates demand more buffers than lower ones
+as the data needed to store is much larger. The default value covers most
+bitrates but further tweaking may be required in certain cases.</p>
+
+<p>Default: 256</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">AudioStreamer.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/bufferFillCountToStart" title="bufferFillCountToStart"></a>
+	<h3 class="subsubtitle method-title">bufferFillCountToStart</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The number of buffers to fill before starting the stream</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (readwrite) UInt32 bufferFillCountToStart</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The higher the value, the more smooth the start will be as there is more data
+cached for playback. A higher value will however result in slower starts which
+can also impact how &ldquo;in-sync&rdquo; livestreams are.</p>
+
+<p>This should always be lower than, or equal to, the <a href="#//api/name/bufferCount">bufferCount</a> property but will
+not error if not done so. AudioStreamer will simply fallback to the bufferCount
+as the amount to fill instead.</p>
+
+<p>Default: 32</p>
 	</div>
 	
 	
@@ -638,7 +741,7 @@ stay ahead of these buffers being filled</p>
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>If this flag is set to NO, then a statically sized buffer is used as
-determined by <a href="#//api/name/bufferCnt">bufferCnt</a> and <a href="#//api/name/bufferSize">bufferSize</a> above and the read stream will be
+determined by bufferCount and bufferSize above and the read stream will be
 descheduled when those fill up. This limits the bandwidth consumed to the
 remote source and also limits memory usage.</p>
 
@@ -699,15 +802,68 @@ inferring of the buffer size fails, however, this is used as a fallback as
 how large each buffer should be.</p>
 
 <p>If you find that this is being used, then it should be coordinated with
-<a href="#//api/name/bufferCnt">bufferCnt</a> above to make sure that the audio stays responsive and slightly
+bufferCount above to make sure that the audio stays responsive and slightly
 behind the HTTP stream</p>
 
-<p>Default: 2048</p>
+<p>Default: 4096</p>
 	</div>
 	
 	
 	
 	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">AudioStreamer.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/error" title="error"></a>
+	<h3 class="subsubtitle method-title">error</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The error the streamer threw</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (readonly) NSError *error</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>If an error occurs on the stream, then this variable is set with the
+corresponding error information.</p>
+
+<p>By default this is nil.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="../Constants/AudioStreamerErrorCode.html">AudioStreamerErrorCode</a></p></code></li>
+			
+		</ul>
+	</div>
 	
 	
 	
@@ -726,13 +882,12 @@ behind the HTTP stream</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>If an error occurs on the stream, then this variable is set with the code
-corresponding to the error</p>
+		<p>The error code the streamer threw (<b class="deprecated">Deprecated:</b><span class="deprecated"> Use the -code method from the error property instead</span>)</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>@property AudioStreamerErrorCode errorCode</code></div>
+	<div class="method-subsection method-declaration"><code>@property (readonly) AudioStreamerErrorCode errorCode</code></div>
 
     
 	
@@ -744,12 +899,24 @@ corresponding to the error</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>By default this is AS_NO_ERROR.</p>
+		<p>If an error occurs on the stream, then this variable is set with the code
+corresponding to the error</p>
+
+<p>By default this is AS_NO_ERROR.</p>
 	</div>
 	
 	
 	
 	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="../Constants/AudioStreamerErrorCode.html">AudioStreamerErrorCode</a></p></code></li>
+			
+		</ul>
+	</div>
 	
 	
 	
@@ -785,9 +952,9 @@ corresponding to the error</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>This is an optional parameter. If not specified, then then the file type will
-be guessed. First, the MIME type of the response is used to guess the file
-type, and if that fails the extension on the <a href="#//api/name/url">url</a> is used. If that fails as
+		<p>This is an optional parameter. If not specified, then the file type will be
+guessed. First, the MIME type of the response is used to guess the file
+type, and if that fails the extension on the url is used. If that fails as
 well, then the default is an MP3 stream.</p>
 
 <p>If this property is set, then no inferring is done and that file type is
@@ -835,6 +1002,142 @@ always used.</p>
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Used to determine file size, but other information may be useful as well</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">AudioStreamer.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/networkError" title="networkError"></a>
+	<h3 class="subsubtitle method-title">networkError</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The network error the streamer threw (<b class="deprecated">Deprecated:</b><span class="deprecated"> Use the -localizedFailureReason method from &lsquo;error&rsquo; property instead</p>
+
+<p>On AS_NETWORK_CONNECTION_FAILED, this will contain the error details</span>)</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (readonly) NSError *networkError</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<div class="warning"><p><strong>Warning:</strong> AS_TIMED_OUT no longer sets this property as no other info is given</p></div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">AudioStreamer.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/playbackRate" title="playbackRate"></a>
+	<h3 class="subsubtitle method-title">playbackRate</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Rate to playback audio</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (readwrite) float playbackRate</code></div>
+
+    
+	
+	
+	
+	
+	
+	<div class="method-subsection availability">
+		<h4 class="method-subtitle parameter-title">Availability</h4>
+		<p>iOS 7 and later, OS X 10.6 and later</p>
+	</div>
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>This property must be in the range 0.5 through 2.0.</p>
+
+<p>A value of 1.0 specifies that the audio should play back at its normal rate.</p>
+
+<p>Default: 1.0</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">AudioStreamer.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/streamDescription" title="streamDescription"></a>
+	<h3 class="subsubtitle method-title">streamDescription</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The stream&rsquo;s description.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (readonly) AudioStreamBasicDescription streamDescription</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>This property contains data like sample rate and number of audio channels.</p>
+
+<p>See Apple&rsquo;s AudioStreamBasicDescription documentation for more information</p>
 	</div>
 	
 	
@@ -906,8 +1209,7 @@ waiting for data and an amount of time larger than this elapses.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>The remote resource that this stream is playing, this is a read-only property
-and cannot be changed after creation</p>
+		<p>The remote resource that this stream is playing</p>
 	</div>		
 	
     
@@ -921,6 +1223,11 @@ and cannot be changed after creation</p>
 	
 	
 	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>This is a read-only property and cannot be changed after creation</p>
+	</div>
 	
 	
 	
@@ -951,12 +1258,12 @@ and cannot be changed after creation</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Allocate a new audio stream with the specified <a href="#//api/name/url">url</a></p>
+		<p>Allocate a new audio stream with the specified url</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>+ (AudioStreamer *)streamWithURL:(NSURL *)<em>url</em></code></div>
+	<div class="method-subsection method-declaration"><code>+ (instancetype)streamWithURL:(NSURL *)<em>url</em></code></div>
 
     
 	
@@ -965,7 +1272,7 @@ and cannot be changed after creation</p>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>url</em></dt>
-			<dd><p>the remote source of audio</p></dd>
+			<dd><p>The remote source of audio</p></dd>
 		</dl>
 		
 	</div>
@@ -974,7 +1281,7 @@ and cannot be changed after creation</p>
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>the stream to configure and being playback with</p>
+		<p>The stream to configure and being playback with</p>
 	</div>
 	
 	
@@ -984,8 +1291,8 @@ and cannot be changed after creation</p>
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>The created stream has not started playback. This gives an opportunity to
-configure the rest of the stream as necessary. To <a href="#//api/name/start">start</a> playback, send the
-stream an explicit &lsquo;start&rsquo; message.</p>
+configure the rest of the stream as necessary. To start playback, send the
+stream an explicit <a href="#//api/name/start">start</a> message.</p>
 	</div>
 	
 	
@@ -1009,7 +1316,7 @@ stream an explicit &lsquo;start&rsquo; message.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Converts an error code to a string</p>
+		<p>Converts an error code to a string (<b class="deprecated">Deprecated:</b><span class="deprecated"> Use the -localizedDescription method from the &lsquo;error&rsquo; property instead</span>)</p>
 	</div>		
 	
     
@@ -1023,7 +1330,7 @@ stream an explicit &lsquo;start&rsquo; message.</p>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>anErrorCode</em></dt>
-			<dd><p>the code to convert, usually from the <a href="#//api/name/errorCode">errorCode</a> field</p></dd>
+			<dd><p>The code to convert, usually from the <a href="#//api/name/errorCode">errorCode</a> property</p></dd>
 		</dl>
 		
 	</div>
@@ -1032,7 +1339,7 @@ stream an explicit &lsquo;start&rsquo; message.</p>
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>the string description of the error code (as best as possible)</p>
+		<p>The string description of the error code (as best as possible)</p>
 	</div>
 	
 	
@@ -1082,7 +1389,7 @@ stream an explicit &lsquo;start&rsquo; message.</p>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>ret</em></dt>
-			<dd><p>the double to fill in with the bit rate on success.</p></dd>
+			<dd><p>The double to fill in with the bit rate on success</p></dd>
 		</dl>
 		
 	</div>
@@ -1101,7 +1408,9 @@ certainty, or NO if it could not be.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>All packets received so far contribute to the calculation of the bit rate.
+		<p>Calculates the bit rate of the stream</p>
+
+<p>All packets received so far contribute to the calculation of the bit rate.
 This is used internally to determine other factors like duration and
 progress.</p>
 	</div>
@@ -1127,8 +1436,7 @@ progress.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>When <a href="#//api/name/isDone">isDone</a> returns true, this will return the reason that the stream has
-been flagged as being done.</p>
+		<p>Returns the reason that the streamer is done</p>
 	</div>		
 	
     
@@ -1141,16 +1449,31 @@ been flagged as being done.</p>
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>the reason for the stream being done, or that it&rsquo;s not done.</p>
+		<p>The reason for the stream being done, or that it&rsquo;s not done.</p>
 	</div>
 	
 	
 	
 	
 	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>When isDone returns true, this will return the reason that the stream has
+been flagged as being done.</p>
+	</div>
 	
 	
 	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="../Constants/AudioStreamerDoneReason.html">AudioStreamerDoneReason</a></p></code></li>
+			
+		</ul>
+	</div>
 	
 	
 	
@@ -1169,7 +1492,7 @@ been flagged as being done.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Calculates the duration of the audio stream in seconds</p>
+		<p>Calculates the duration of the audio stream, in seconds</p>
 	</div>		
 	
     
@@ -1183,7 +1506,7 @@ been flagged as being done.</p>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>ret</em></dt>
-			<dd><p>where to fill in with the duration of the stream on success.</p></dd>
+			<dd><p>The variable to fill with the duration of the stream on success</p></dd>
 		</dl>
 		
 	</div>
@@ -1205,6 +1528,108 @@ undefined</p>
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Uses information about the size of the file and the calculated bit rate to
 determine the duration of the stream.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">AudioStreamer.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/fadeInDuration:" title="fadeInDuration:"></a>
+	<h3 class="subsubtitle method-title">fadeInDuration:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Fade in playback</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)fadeInDuration:(float)<em>duration</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>duration</em></dt>
+			<dd><p>a double which represents the fade-in time span.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The AudioQueue volume is progressively increased from 0 to 1</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">AudioStreamer.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/fadeOutDuration:" title="fadeOutDuration:"></a>
+	<h3 class="subsubtitle method-title">fadeOutDuration:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Fade out playback</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)fadeOutDuration:(float)<em>duration</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>duration</em></dt>
+			<dd><p>a double which represents the fade-in time span.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The AudioQueue volume is progressively decreased from 1 to 0.</p>
 	</div>
 	
 	
@@ -1251,7 +1676,7 @@ determine the duration of the stream.</p>
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>A stream can be &lsquo;done&rsquo; if it either hits an error or consumes all audio data
-from the remote source.</p>
+from the remote source. This method also checks if the stream has been stopped.</p>
 	</div>
 	
 	
@@ -1508,8 +1933,8 @@ any other error or bad state was encountered.</p>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>ret</em></dt>
-			<dd><p>a double which is filled in with the progress of the stream. The
-contents are undefined if NO is returned.</p></dd>
+			<dd><p>A double which is filled in with the progress of the stream. The
+contents are undefined if NO is returned</p></dd>
 		</dl>
 		
 	</div>
@@ -1519,7 +1944,7 @@ contents are undefined if NO is returned.</p></dd>
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
 		<p>YES if the progress of the stream was determined, or NO if the
-progress could not be determined at this time.</p>
+progress could not be determined at this time</p>
 	</div>
 	
 	
@@ -1530,6 +1955,64 @@ progress could not be determined at this time.</p>
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>The AudioQueue instance is polled to determine the current time into the
 stream, and this is returned.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">AudioStreamer.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/seekByDelta:" title="seekByDelta:"></a>
+	<h3 class="subsubtitle method-title">seekByDelta:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Seek to a relative time in the audio stream</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (BOOL)seekByDelta:(double)<em>seekTimeDelta</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>seekTimeDelta</em></dt>
+			<dd><p>The time interval from current seek time to seek to</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>YES if the stream will be seeking, or NO if the stream did not have
+enough information available to it to seek to the specified time.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>This will calculate the current stream progress and seek relative to it
+by the specified delta. Useful for seeking.</p>
 	</div>
 	
 	
@@ -1567,7 +2050,7 @@ stream, and this is returned.</p>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>newSeekTime</em></dt>
-			<dd><p>the time in seconds to seek to</p></dd>
+			<dd><p>The time in seconds to seek to</p></dd>
 		</dl>
 		
 	</div>
@@ -1629,12 +2112,12 @@ the remote source, although this is done under the hood.</p>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>host</em></dt>
-			<dd><p>the address/hostname of the remote host</p></dd>
+			<dd><p>The address/hostname of the remote host</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>port</em></dt>
-			<dd><p>the port of the proxy</p></dd>
+			<dd><p>The port of the proxy</p></dd>
 		</dl>
 		
 	</div>
@@ -1680,12 +2163,12 @@ the remote source, although this is done under the hood.</p>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>host</em></dt>
-			<dd><p>the address/hostname of the remote host</p></dd>
+			<dd><p>The address/hostname of the remote host</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>port</em></dt>
-			<dd><p>the port of the proxy</p></dd>
+			<dd><p>The port of the proxy</p></dd>
 		</dl>
 		
 	</div>
@@ -1722,7 +2205,7 @@ the remote source, although this is done under the hood.</p>
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (BOOL)setVolume:(double)<em>volume</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (BOOL)setVolume:(float)<em>volume</em></code></div>
 
     
 	
@@ -1731,8 +2214,8 @@ the remote source, although this is done under the hood.</p>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>volume</em></dt>
-			<dd><p>the volume to set the stream to in the range 0.0-1.0 where 1.0
-is the loudest and 0.0 is silent.</p></dd>
+			<dd><p>The volume to set the stream to in the range 0.0 to 1.0 where 1.0
+is the loudest and 0.0 is silent</p></dd>
 		</dl>
 		
 	</div>
@@ -1741,9 +2224,9 @@ is the loudest and 0.0 is silent.</p></dd>
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p>YES if the volume was set, or NO if the audio queue wasn&rsquo;t to have
-the volume ready to be set. When the state for this audio streamer
-changes internally to have a stream, then setVolume: will work</p>
+		<p>YES if the volume was set, or NO if the audio queue wasn&rsquo;t ready to
+have its volume set. When the state for this audio streamer changes
+internally to have a stream, then setVolume: will work</p>
 	</div>
 	
 	
@@ -1820,7 +2303,7 @@ before this method is invoked.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Stop all streams, cleaning up resources and preventing all further events
+		<p>Stop all streams, clean up resources and prevent all further events
 from occurring.</p>
 	</div>		
 	
@@ -1860,6 +2343,11 @@ isn&rsquo;t already AS_STOPPED or AS_DONE.</p>
 					</div>
 					
 					
+                    
+                    
+                    
+                    
+
 				</div>
 				<div class="main-navigation navigation-bottom">
 					<ul>
@@ -1870,9 +2358,9 @@ isn&rsquo;t already AS_STOPPED or AS_DONE.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 _. All rights reserved. (Last updated: 2012-08-30)</span><br />
+						<p><span class="copyright">&copy; 2014  . All rights reserved. (Last updated: 2014-12-09)</span><br />
 						
-						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2 (build 963)</a>.</span></p>
 						
 					</div>
 				</div>
