@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>iPhoneStreamer Class Reference</title>
+	<title>iOSStreamer Class Reference</title>
 
 	<link rel="stylesheet" href="../css/style.css">
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
@@ -56,6 +56,8 @@
 	
 	<optgroup label="Properties">
 		
+		<option value="//api/name/delegate">delegate</option>
+		
 		<option value="//api/name/interrupted">interrupted</option>
 		
 	</optgroup>
@@ -77,7 +79,7 @@
 		<div id="overview_contents" class="container">
 			<div id="content">
 				<main role="main">
-					<h1 class="title">iPhoneStreamer Class Reference</h1>
+					<h1 class="title">iOSStreamer Class Reference</h1>
 
 					
 					<div class="section section-specification"><table cellspacing="0"><tbody>
@@ -89,7 +91,7 @@
 	<td>AVAudioSessionDelegate</td>
 </tr><tr>
 	<th>Declared in</th>
-	<td>iPhoneStreamer.h</td>
+	<td>iOSStreamer.h</td>
 </tr>
 						</tbody></table></div>
 					
@@ -99,7 +101,7 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>The iPhoneStreamer subclass is for those using <a href="../Classes/AudioStreamer.html">AudioStreamer</a> on iOS.
+						<p>The iOSStreamer subclass is for those using <a href="../Classes/AudioStreamer.html">AudioStreamer</a> on iOS.
 This class adds extra iOS features that are unavailable or not required
 on OS X.</p>
 
@@ -112,7 +114,7 @@ on OS X.</p>
 </ul>
 
 
-<p>You only need to replace &ldquo;AudioStreamer&rdquo; with &ldquo;iPhoneStreamer&rdquo; in your
+<p>You only need to replace &ldquo;AudioStreamer&rdquo; with &ldquo;iOSStreamer&rdquo; in your
 code. Everything else is handled for you which is why there is little
 additional properties and methods.</p>
 					</div>
@@ -130,6 +132,58 @@ additional properties and methods.</p>
 <h2 class="task-title">Properties</h2>
 						<div class="task-list">
 							<div class="section-method">
+	<a name="//api/name/delegate" title="delegate"></a>
+	<h3 class="method-title"><code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Sets the delegate for event callbacks</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, readwrite, weak) id&lt;iOSStreamerDelegate&gt; delegate</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection see-also-section">
+				<h4 class="method-subtitle">See Also</h4>
+				<ul>
+					
+					<li><code><p><a href="../Protocols/iOSStreamerDelegate.html">iOSStreamerDelegate</a></p></code></li>
+					
+					<li><code><p><a href="../Protocols/AudioStreamerDelegate.html">AudioStreamerDelegate</a></p></code></li>
+					
+				</ul>
+			</div>
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">iOSStreamer.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
 	<a name="//api/name/interrupted" title="interrupted"></a>
 	<h3 class="method-title"><code><a href="#//api/name/interrupted">&nbsp;&nbsp;interrupted</a></code>
 </h3>
@@ -171,7 +225,7 @@ interrupted and will be set back to NO when the interruption is over</p>
 			
 			<div class="method-subsection declared-in-section">
 				<h4 class="method-subtitle">Declared In</h4>
-				<p><code class="declared-in-ref">iPhoneStreamer.h</code></p>
+				<p><code class="declared-in-ref">iOSStreamer.h</code></p>
 			</div>
 			
 			
