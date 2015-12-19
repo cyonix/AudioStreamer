@@ -7,7 +7,7 @@
 
 	<link rel="stylesheet" href="../css/style.css">
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
-	<meta name="generator" content="appledoc 2.2.1 (build 1333)">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
 </head>
 <body class="appledoc">
 	<header>
@@ -88,6 +88,8 @@
 		
 		<option value="//api/name/playing">playing</option>
 		
+		<option value="//api/name/seekable">seekable</option>
+		
 		<option value="//api/name/streamDescription">streamDescription</option>
 		
 		<option value="//api/name/timeoutInterval">timeoutInterval</option>
@@ -111,6 +113,8 @@
 
 	
 	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/bufferProgress:">- bufferProgress:</option>
 		
 		<option value="//api/name/calculatedBitRate:">- calculatedBitRate:</option>
 		
@@ -647,6 +651,69 @@ been flagged as being done. AS_NOT_DONE will be returned otherwise.</p>
 		</div>
 	</div>
 </div><div class="section-method">
+	<a name="//api/name/seekable" title="seekable"></a>
+	<h3 class="method-title"><code><a href="#//api/name/seekable">&nbsp;&nbsp;seekable</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns whether the stream can be seeked with the <a href="#//api/name/seekToTime:">seekToTime:</a> method</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic, getter=isSeekable, readonly) BOOL seekable</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>The stream cannot be seeked if:</p>
+
+<ul>
+<li>The bitrate cannot be calculated</li>
+<li>The duration cannot be calculated</li>
+<li>The Accept-Ranges HTTP header does not return &ldquo;bytes&rdquo;</li>
+</ul>
+
+
+<p>The <a href="#//api/name/seekToTime:">seekToTime:</a> method will always return this value but this property may be
+useful for those who want to know whether they can seek beforehand. An example could
+be if you wanted to disable user interaction if a seek bar.</p>
+
+<p>This property does not necessarily mean the current stream will never be seekable.
+This property <em>could</em> return NO before
+<a href="../Protocols/AudioStreamerDelegate.html#//api/name/streamerBitrateIsReady:">[AudioStreamerDelegate streamerBitrateIsReady:]</a> is called, depending on the stream.</p>
+
+<p>Returns YES if the stream can be seeked, NO otherwise.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AudioStreamer.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
 	<a name="//api/name/error" title="error"></a>
 	<h3 class="method-title"><code><a href="#//api/name/error">&nbsp;&nbsp;error</a></code>
 </h3>
@@ -716,7 +783,7 @@ corresponding error information.</p>
 			
 			
 			<div class="method-subsection brief-description">
-				<p>The error code the streamer threw (<b class="deprecated">Deprecated:</b><span class="deprecated"> Use the -code method from the error property instead</span>)</p>
+				<p>The error code the streamer threw (<b class="deprecated">Deprecated:</b><span class="deprecated"> Use the -code method from the &lsquo;error&rsquo; property instead</span>)</p>
 			</div>
 			
 		    
@@ -1020,7 +1087,7 @@ corresponding to the error</p>
 			
 			
 			<div class="method-subsection brief-description">
-				<p>The current song playing in an ICY stream.</p>
+				<p>The current song playing in an ICY or ID3v2 stream.</p>
 			</div>
 			
 		    
@@ -1037,10 +1104,13 @@ corresponding to the error</p>
 			
 			<div class="method-subsection discussion-section">
 				<h4 class="method-subtitle">Discussion</h4>
-				<p>This property only works for ICY streams (eg. Shoutcast). This will return
-nil if the stream is not an ICY stream or there is no current song metadata available.</p>
+				<p>This property only works for ICY streams (eg. Shoutcast) and streams with
+ID3v2 tags (some MP3s). This will return nil if the stream is not a valid stream or
+there is no current song metadata available.</p>
 
-<p>The current song field is sometimes used as the stream title on some streams.</p>
+<p>The format of the property in ID3v2 streams is &ldquo;Artist - Title&rdquo;.</p>
+
+<p>The current song field is sometimes used as the stream title on some ICY streams.</p>
 			</div>
 			
 
@@ -1963,9 +2033,7 @@ certainty, or NO if it could not be.</p>
 			
 			<div class="method-subsection discussion-section">
 				<h4 class="method-subtitle">Discussion</h4>
-				<p>Calculates the bit rate of the stream</p>
-
-<p>All packets received so far contribute to the calculation of the bit rate.
+				<p>All packets received so far contribute to the calculation of the bit rate.
 This is used internally to determine other factors like duration and
 progress.</p>
 			</div>
@@ -2178,6 +2246,73 @@ stream, and this is returned.</p>
 		</div>
 	</div>
 </div><div class="section-method">
+	<a name="//api/name/bufferProgress:" title="bufferProgress:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/bufferProgress:">&ndash;&nbsp;bufferProgress:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Calculate the buffer progress into the stream, in seconds</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (BOOL)bufferProgress:(double *)<em>ret</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>ret</code></th>
+						<td><p>A double which is filled in with the buffer progress of the stream. The
+contents are undefined if NO is returned</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>YES if the buffer progress of the stream was determined, or NO if the buffer
+progress could not be determined at this time</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>This calculates how far we have buffered into memory. You can stream up to
+the point returned by this method without the streamer having to reconnect. The
+streamer will read packets already fetched from its memory buffers.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">AudioStreamer.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
 	<a name="//api/name/fadeInDuration:" title="fadeInDuration:"></a>
 	<h3 class="method-title"><code><a href="#//api/name/fadeInDuration:">&ndash;&nbsp;fadeInDuration:</a></code>
 </h3>
@@ -2318,10 +2453,10 @@ have its volume set.</p>
 				<footer>
 					<div class="footer-copyright">
 						
-						<p class="copyright">Copyright &copy; 2015  . All rights reserved. Updated: 2015-02-10</p>
+						<p class="copyright">Copyright &copy; 2015  . All rights reserved. Updated: 2015-12-19</p>
 						
 						
-						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1333)</a>.</p>
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
 						
 					</div>
 				</footer>
