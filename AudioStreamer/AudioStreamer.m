@@ -288,7 +288,7 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
   if (state_ != AS_PLAYING) return NO;
   assert(audioQueue != NULL);
   OSStatus osErr = AudioQueuePause(audioQueue);
-  CHECK_ERR(osErr, AS_AUDIO_QUEUE_PAUSE_FAILED, [[self class] descriptionforAQErrorCode:osErr], NO);
+  CHECK_ERR(osErr, AS_AUDIO_QUEUE_PAUSE_FAILED, [[self class] descriptionForAQErrorCode:osErr], NO);
   queuePaused = true;
   [self setState:AS_PAUSED];
   return YES;
@@ -433,7 +433,7 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
       free(oldBuffers);
     }
     seeking = false;
-    [self failWithErrorCode:AS_AUDIO_QUEUE_STOP_FAILED reason:[[self class] descriptionforAQErrorCode:osErr]];
+    [self failWithErrorCode:AS_AUDIO_QUEUE_STOP_FAILED reason:[[self class] descriptionForAQErrorCode:osErr]];
     return NO;
   }
 
@@ -536,7 +536,7 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
         }
         if (osErr) {
           free(oldBuffers);
-          [self failWithErrorCode:AS_AUDIO_QUEUE_ENQUEUE_FAILED reason:[[self class] descriptionforAQErrorCode:osErr]];
+          [self failWithErrorCode:AS_AUDIO_QUEUE_ENQUEUE_FAILED reason:[[self class] descriptionForAQErrorCode:osErr]];
           return NO;
         }
 
@@ -874,7 +874,7 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
   return ret;
 }
 
-+ (NSString *)descriptionforAQErrorCode:(OSStatus)osErr {
++ (NSString *)descriptionForAQErrorCode:(OSStatus)osErr {
   switch (osErr) {
     case kAudioQueueErr_BufferEmpty:
       return @"A buffer of data was generated but no audio was found.";
@@ -1855,7 +1855,7 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
   } else {
     osErr = AudioQueueEnqueueBuffer(audioQueue, fillBuf, 0, NULL);
   }
-  CHECK_ERR(osErr, AS_AUDIO_QUEUE_ENQUEUE_FAILED, [[self class] descriptionforAQErrorCode:osErr], -1);
+  CHECK_ERR(osErr, AS_AUDIO_QUEUE_ENQUEUE_FAILED, [[self class] descriptionForAQErrorCode:osErr], -1);
 
   buffers[fillBufferIndex]->packetCount = packetsFilled;
   buffers[fillBufferIndex]->packetStart -= (packetsFilled - 1);
@@ -1881,7 +1881,7 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
   if (queued_vbr_head == NULL && queued_cbr_head == NULL &&
       CFReadStreamGetStatus(stream) == kCFStreamStatusAtEnd) {
     osErr = AudioQueueFlush(audioQueue);
-    CHECK_ERR(osErr, AS_AUDIO_QUEUE_FLUSH_FAILED, [[self class] descriptionforAQErrorCode:osErr], -1);
+    CHECK_ERR(osErr, AS_AUDIO_QUEUE_FLUSH_FAILED, [[self class] descriptionForAQErrorCode:osErr], -1);
   }
 
   if (buffers[fillBufferIndex]->inuse) {
@@ -1916,14 +1916,14 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
   OSStatus osErr = AudioQueueNewOutput(&_streamDescription, ASAudioQueueOutputCallback,
                                        (__bridge void*) self, CFRunLoopGetMain(), NULL,
                                        0, &audioQueue);
-  CHECK_ERR(osErr, AS_AUDIO_QUEUE_CREATION_FAILED, [[self class] descriptionforAQErrorCode:osErr]);
+  CHECK_ERR(osErr, AS_AUDIO_QUEUE_CREATION_FAILED, [[self class] descriptionForAQErrorCode:osErr]);
 
   // start the queue if it has not been started already
   // listen to the "isRunning" property
   osErr = AudioQueueAddPropertyListener(audioQueue, kAudioQueueProperty_IsRunning,
                                         ASAudioQueueIsRunningCallback,
                                         (__bridge void*) self);
-  CHECK_ERR(osErr, AS_AUDIO_QUEUE_ADD_LISTENER_FAILED, [[self class] descriptionforAQErrorCode:osErr]);
+  CHECK_ERR(osErr, AS_AUDIO_QUEUE_ADD_LISTENER_FAILED, [[self class] descriptionForAQErrorCode:osErr]);
 
   if (vbr) {
     /* Try to determine the packet size, eventually falling back to some
@@ -1960,7 +1960,7 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
 
     osErr = AudioQueueAllocateBuffer(audioQueue, packetBufferSize,
                                      &(buffers[i]->ref));
-    CHECK_ERR(osErr, AS_AUDIO_QUEUE_BUFFER_ALLOCATION_FAILED, [[self class] descriptionforAQErrorCode:osErr]);
+    CHECK_ERR(osErr, AS_AUDIO_QUEUE_BUFFER_ALLOCATION_FAILED, [[self class] descriptionForAQErrorCode:osErr]);
   }
 
   /* Playback rate */
@@ -2021,7 +2021,7 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
 - (BOOL)startAudioQueue
 {
   OSStatus osErr = AudioQueueStart(audioQueue, NULL);
-  CHECK_ERR(osErr, AS_AUDIO_QUEUE_START_FAILED, [[self class] descriptionforAQErrorCode:osErr], NO);
+  CHECK_ERR(osErr, AS_AUDIO_QUEUE_START_FAILED, [[self class] descriptionForAQErrorCode:osErr], NO);
 
   if (queuePaused) {
     queuePaused = false;
@@ -2486,7 +2486,7 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
     {
       /* No previous error occurred so we simply aren't buffering fasting enough */
       OSStatus osErr = AudioQueuePause(audioQueue);
-      CHECK_ERR(osErr, AS_AUDIO_QUEUE_PAUSE_FAILED, [[self class] descriptionforAQErrorCode:osErr]);
+      CHECK_ERR(osErr, AS_AUDIO_QUEUE_PAUSE_FAILED, [[self class] descriptionForAQErrorCode:osErr]);
       queuePaused = true;
 
       /* This can either fix or delay the problem
@@ -2499,7 +2499,7 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
         for (UInt32 i = 0; i < _bufferCount; ++i) {
           osErr = AudioQueueAllocateBuffer(audioQueue, packetBufferSize,
                                            &(buffers[i]->ref));
-          CHECK_ERR(osErr, AS_AUDIO_QUEUE_BUFFER_ALLOCATION_FAILED, [[self class] descriptionforAQErrorCode:osErr]);
+          CHECK_ERR(osErr, AS_AUDIO_QUEUE_BUFFER_ALLOCATION_FAILED, [[self class] descriptionForAQErrorCode:osErr]);
         }
       }
 
