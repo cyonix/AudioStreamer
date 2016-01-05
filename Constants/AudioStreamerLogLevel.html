@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>AudioStreamerDoneReason Constants Reference</title>
+	<title>AudioStreamerLogLevel Constants Reference</title>
 
 	<link rel="stylesheet" href="../css/style.css">
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
@@ -59,7 +59,7 @@
 		<div id="overview_contents" class="container">
 			<div id="content">
 				<main role="main">
-					<h1 class="title">AudioStreamerDoneReason Constants Reference</h1>
+					<h1 class="title">AudioStreamerLogLevel Constants Reference</h1>
 
 					
 					<div class="section section-specification"><table cellspacing="0"><tbody>
@@ -75,11 +75,16 @@
 					
 
                     
-                    <h3 class="subsubtitle method-title">AudioStreamerDoneReason</h3>
+                    <h3 class="subsubtitle method-title">AudioStreamerLogLevel</h3>
                     
 					
 					<div class="section section-overview">
-                        <p>Possible reasons of why the streamer is now done.</p>
+                        <p>Log levels. Used to filter out certain levels of logging.</p>
+
+<p>Each level down the chain towards verbose will include the previous log levels.
+For example, AS_LOG_LEVEL_WARN will include AS_LOG_LEVEL_ERROR and AS_LOG_LEVEL_FATAL.</p>
+
+<p>See <a href="../Classes/AudioStreamer.html#//api/name/logLevel">[AudioStreamer logLevel]</a> for more information.</p>
 					</div>
 					
 					
@@ -87,15 +92,21 @@
                         <!-- display enum values -->
                         
                         <h4 class="method-subtitle">Definition</h4>
-                        <code>typedef NS_ENUM(NSInteger, AudioStreamerDoneReason ) {<br>
+                        <code>typedef NS_ENUM(NSUInteger, AudioStreamerLogLevel ) {<br>
                             
-                            &nbsp;&nbsp; <a href="">AS_DONE_ERROR</a> = -1,<br>
+                            &nbsp;&nbsp; <a href="">AS_LOG_LEVEL_NONE</a> = 0,<br>
                             
-                            &nbsp;&nbsp; <a href="">AS_NOT_DONE</a> = 0,<br>
+                            &nbsp;&nbsp; <a href="">AS_LOG_LEVEL_FATAL</a>,<br>
                             
-                            &nbsp;&nbsp; <a href="">AS_DONE_STOPPED</a> = 1,<br>
+                            &nbsp;&nbsp; <a href="">AS_LOG_LEVEL_ERROR</a>,<br>
                             
-                            &nbsp;&nbsp; <a href="">AS_DONE_EOF</a> = 2,<br>
+                            &nbsp;&nbsp; <a href="">AS_LOG_LEVEL_WARN</a>,<br>
+                            
+                            &nbsp;&nbsp; <a href="">AS_LOG_LEVEL_INFO</a>,<br>
+                            
+                            &nbsp;&nbsp; <a href="">AS_LOG_LEVEL_DEBUG</a>,<br>
+                            
+                            &nbsp;&nbsp; <a href="">AS_LOG_LEVEL_VERBOSE</a>,<br>
                             
                             };</code>
                     
@@ -105,11 +116,11 @@
                         <h4 class="method-subtitle">Constants</h4>
                         <dl class="termdef">
                             
-                            <dt><a name="" title="AS_DONE_ERROR"></a><code>AS_DONE_ERROR</code></dt>
+                            <dt><a name="" title="AS_LOG_LEVEL_NONE"></a><code>AS_LOG_LEVEL_NONE</code></dt>
 <dd>
 
 
-<p>The streamer has ended with an error. Check <a href="../Classes/AudioStreamer.html#//api/name/error">[AudioStreamer error]</a> for information</p>
+<p>No logging will occur.</p>
 
 
 
@@ -122,11 +133,11 @@
 	
 </dd>
                             
-                            <dt><a name="" title="AS_NOT_DONE"></a><code>AS_NOT_DONE</code></dt>
+                            <dt><a name="" title="AS_LOG_LEVEL_FATAL"></a><code>AS_LOG_LEVEL_FATAL</code></dt>
 <dd>
 
 
-<p>The streamer is not done</p>
+<p>Logging will only occur in the event of a fatal error such as an assertion.</p>
 
 
 
@@ -139,11 +150,12 @@
 	
 </dd>
                             
-                            <dt><a name="" title="AS_DONE_STOPPED"></a><code>AS_DONE_STOPPED</code></dt>
+                            <dt><a name="" title="AS_LOG_LEVEL_ERROR"></a><code>AS_LOG_LEVEL_ERROR</code></dt>
 <dd>
 
 
-<p>The streamer was stopped through the <a href="../Classes/AudioStreamer.html#//api/name/stop">[AudioStreamer stop]</a> method</p>
+<p>Logging will occur when the streamer encounters a error that has caused the streamer
+to stop.</p>
 
 
 
@@ -156,11 +168,64 @@
 	
 </dd>
                             
-                            <dt><a name="" title="AS_DONE_EOF"></a><code>AS_DONE_EOF</code></dt>
+                            <dt><a name="" title="AS_LOG_LEVEL_WARN"></a><code>AS_LOG_LEVEL_WARN</code></dt>
 <dd>
 
 
-<p>The streamer has reached the end of the file</p>
+<p>Logging will occur when the streamer encounters an issue but not necessarily one that
+has resulted in the streamer having to stop.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">AudioStreamer.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="AS_LOG_LEVEL_INFO"></a><code>AS_LOG_LEVEL_INFO</code></dt>
+<dd>
+
+
+<p>Logging will occur when the streamer has reached a point of interest in its streaming.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">AudioStreamer.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="AS_LOG_LEVEL_DEBUG"></a><code>AS_LOG_LEVEL_DEBUG</code></dt>
+<dd>
+
+
+<p>Logging will occur when the streamer has information that may be useful when debugging
+the streamer.</p>
+
+
+
+
+
+    
+	<p>
+		Declared In <code class="declared-in-ref">AudioStreamer.h</code>.
+	</p>
+	
+</dd>
+                            
+                            <dt><a name="" title="AS_LOG_LEVEL_VERBOSE"></a><code>AS_LOG_LEVEL_VERBOSE</code></dt>
+<dd>
+
+
+<p>Logging will occur at most steps in the streamer&rsquo;s process. Expect a lot of logs!</p>
 
 
 
