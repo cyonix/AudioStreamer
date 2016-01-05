@@ -790,7 +790,7 @@ struct queued_cbr_packet;
  *
  * Default: nil
  */
-@property (readwrite, copy) void (^logHandler)(NSString *);
+@property (readwrite, copy) void (^logHandler)(NSString *msg);
 
 /**
  * @brief Set an HTTP proxy for this stream
