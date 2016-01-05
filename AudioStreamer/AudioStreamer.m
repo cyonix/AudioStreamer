@@ -337,7 +337,7 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
   AudioStreamerState prevState = state_;
   if (state_ != AS_DONE) {
     // Delay notification to the end to avoid race conditions
-    state_ = AS_STOPPED;
+    [self setState:AS_STOPPED shouldNotify:NO];
   }
 
   [timeout invalidate];
@@ -369,13 +369,7 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
   packetBufferSize = 0;
 
   if (prevState != state_) {
-    [[NSNotificationCenter defaultCenter]
-          postNotificationName:_ASStatusChangedNotification // Deprecated
-                        object:self];
-    __strong id <AudioStreamerDelegate> delegate = _delegate;
-    if (delegate && [delegate respondsToSelector:@selector(streamerStatusDidChange:)]) {
-      [delegate streamerStatusDidChange:self];
-    }
+    [self notifyStateChange];
   }
 }
 
@@ -1018,26 +1012,27 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
 
   if (shouldStop)
   {
-    state_ = AS_DONE; // Delay notification to avoid race conditions
-
+    [self setState:AS_DONE shouldNotify:NO]; // Delay notification to avoid race conditions
     [self stop];
-
-    [[NSNotificationCenter defaultCenter]
-          postNotificationName:_ASStatusChangedNotification // Deprecated
-                        object:self];
-    __strong id <AudioStreamerDelegate> delegate = _delegate;
-    if (delegate && [delegate respondsToSelector:@selector(streamerStatusDidChange:)]) {
-      [delegate streamerStatusDidChange:self];
-    }
+    [self notifyStateChange];
   }
 }
 
 - (void)setState:(AudioStreamerState)aStatus {
+  [self setState:aStatus shouldNotify:YES];
+}
+
+- (void)setState:(AudioStreamerState)aStatus shouldNotify:(BOOL)shouldNotify {
   LOG_INFO(@"transitioning to state:%tu", aStatus);
 
   if (state_ == aStatus) return;
   state_ = aStatus;
 
+  if (shouldNotify)
+    [self notifyStateChange];
+}
+
+- (void)notifyStateChange {
   [[NSNotificationCenter defaultCenter]
         postNotificationName:_ASStatusChangedNotification // Deprecated
                       object:self];
@@ -1306,15 +1301,9 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
         }
       } else {
         /* We tried reconnecting but failed. Time to stop. */
-        state_ = AS_DONE; // Delay notification to avoid race conditions
+        [self setState:AS_DONE shouldNotify:NO]; // Delay notification to avoid race conditions
         [self stop];
-        [[NSNotificationCenter defaultCenter]
-              postNotificationName:_ASStatusChangedNotification // Deprecated
-                            object:self];
-        __strong id <AudioStreamerDelegate> delegate = _delegate;
-        if (delegate && [delegate respondsToSelector:@selector(streamerStatusDidChange:)]) {
-          [delegate streamerStatusDidChange:self];
-        }
+        [self notifyStateChange];
       }
       return;
 
@@ -2488,29 +2477,17 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
       if (fileLength != 0)
       {
         /* Livestream - don't bother reconnecting */
-        state_ = AS_DONE; // Delay notification to avoid race conditions
+        [self setState:AS_DONE shouldNotify:NO]; // Delay notification to avoid race conditions
         [self stop];
-        [[NSNotificationCenter defaultCenter]
-              postNotificationName:_ASStatusChangedNotification // Deprecated
-                            object:self];
-        __strong id <AudioStreamerDelegate> delegate = _delegate;
-        if (delegate && [delegate respondsToSelector:@selector(streamerStatusDidChange:)]) {
-          [delegate streamerStatusDidChange:self];
-        }
+        [self notifyStateChange];
       }
       /* Try to reconnect */
       double progress;
       [self progress:&progress];
       if (![self seekToTime:progress]) {
-        state_ = AS_DONE; // Delay notification to avoid race conditions
+        [self setState:AS_DONE shouldNotify:NO]; // Delay notification to avoid race conditions
         [self stop];
-        [[NSNotificationCenter defaultCenter]
-              postNotificationName:_ASStatusChangedNotification // Deprecated
-                            object:self];
-        __strong id <AudioStreamerDelegate> delegate = _delegate;
-        if (delegate && [delegate respondsToSelector:@selector(streamerStatusDidChange:)]) {
-          [delegate streamerStatusDidChange:self];
-        }
+        [self notifyStateChange];
       }
     }
     else
@@ -2570,13 +2547,10 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
     OSStatus osErr = AudioQueueGetProperty(audioQueue, kAudioQueueProperty_IsRunning,
                                            &running, &output);
     if (!osErr && !running) {
-      state_ = AS_DONE;
+      [self setState:AS_DONE shouldNotify:NO];
       // Let the method exit before notifying the world.
       dispatch_async(dispatch_get_main_queue(), ^{
-        __strong id <AudioStreamerDelegate> delegate = _delegate;
-        if (delegate && [delegate respondsToSelector:@selector(streamerStatusDidChange:)]) {
-          [delegate streamerStatusDidChange:self];
-        }
+        [self notifyStateChange];
       });
     }
   }
