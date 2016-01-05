@@ -35,22 +35,51 @@
 #define kDefaultAudioFileType kAudioFileMP3Type
 
 /* CHECK_ERR */
-#define CHECK_ERR_NORET(err, code, reasonStr) {                                 \
+#define _CHECK_ERR_NORET(err, code, reasonStr) {                                 \
     if (err) { [self failWithErrorCode:code reason:reasonStr]; return; }        \
 }
-#define CHECK_ERR_RET(err, code, reasonStr, retVal) {                           \
+#define _CHECK_ERR_RET(err, code, reasonStr, retVal) {                           \
     if (err) { [self failWithErrorCode:code reason:reasonStr]; return retVal; } \
 }
-#define CHECK_ERR_X(x, err, code, reasonStr, retVal, FUNC, ...) FUNC
-#define CHECK_ERR(...) CHECK_ERR_X(,##__VA_ARGS__, CHECK_ERR_RET(__VA_ARGS__), CHECK_ERR_NORET(__VA_ARGS__))
+#define _CHECK_ERR_X(x, err, code, reasonStr, retVal, FUNC, ...) FUNC
+#define CHECK_ERR(...) _CHECK_ERR_X(,##__VA_ARGS__, _CHECK_ERR_RET(__VA_ARGS__), _CHECK_ERR_NORET(__VA_ARGS__))
+
+/* ASSERT_ERR */
+#ifndef NDEBUG
+#define ASSERT_ERR(cond, ...) \
+  do {\
+    if (!(cond)) {\
+      NSString *reason = [NSString stringWithFormat:@"Assertion failure: %s on line %@:%d. %@",\
+                                                      #cond,\
+                                                      [[NSString stringWithUTF8String:__FILE__] lastPathComponent],\
+                                                      __LINE__,\
+                                                      [NSString stringWithFormat:@"" __VA_ARGS__]];\
+      LOG_FATAL(@"%@", reason);\
+      [[NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil] raise];\
+    }\
+  } while(0)
+#else
+#define ASSERT_ERR(cond, ...) \
+  do {\
+    if (!(cond)) {\
+      NSString *reason = [NSString stringWithFormat:@"Assertion failure: %s on line %@:%d. %@",\
+                                                      #cond,\
+                                                      [[NSString stringWithUTF8String:__FILE__] lastPathComponent],\
+                                                      __LINE__,\
+                                                      [NSString stringWithFormat:@"" __VA_ARGS__]];\
+      LOG_FATAL(@"%@", reason);\
+    }\
+} while(0)
+#endif
 
 /* Logging */
 #define LOG_LEVEL_NONE 0
-#define LOG_LEVEL_ERROR 1
-#define LOG_LEVEL_WARN 2
-#define LOG_LEVEL_INFO 3
-#define LOG_LEVEL_DEBUG 4
-#define LOG_LEVEL_VERBOSE 5
+#define LOG_LEVEL_FATAL 1
+#define LOG_LEVEL_ERROR 2
+#define LOG_LEVEL_WARN 3
+#define LOG_LEVEL_INFO 4
+#define LOG_LEVEL_DEBUG 5
+#define LOG_LEVEL_VERBOSE 6
 
 #if defined(DEBUG)
 #define LOG_LEVEL LOG_LEVEL_DEBUG
@@ -59,6 +88,7 @@
 #endif
 
 #define LOG(lvl, fmt, args...) if (lvl <= LOG_LEVEL) NSLog(@"%s " fmt, __PRETTY_FUNCTION__, ##args)
+#define LOG_FATAL(fmt, args...) LOG(LOG_LEVEL_FATAL, fmt, ##args)
 #define LOG_ERROR(fmt, args...) LOG(LOG_LEVEL_ERROR, fmt, ##args)
 #define LOG_WARN(fmt, args...) LOG(LOG_LEVEL_WARN, fmt, ##args)
 #define LOG_INFO(fmt, args...) LOG(LOG_LEVEL_INFO, fmt, ##args)
@@ -320,7 +350,8 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
   }
   if (audioQueue) {
     AudioQueueStop(audioQueue, true);
-    assert(!AudioQueueDispose(audioQueue, true));
+    OSStatus osErr = AudioQueueDispose(audioQueue, true);
+    ASSERT_ERR(!osErr, @"AudioQueueDispose returned error \"%@\"", [[self class] descriptionForAQErrorCode:osErr]);
     audioQueue = nil;
   }
   if (buffers != NULL) {
@@ -2583,7 +2614,8 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
  * @brief Closes the file stream
  */
 - (void)closeFileStream {
-  assert(!AudioFileStreamClose(audioFileStream));
+  OSStatus osErr = AudioFileStreamClose(audioFileStream);
+  ASSERT_ERR(!osErr, @"AudioFileStreamClose returned error \"%@\"", [[self class] descriptionForAFSErrorCode:osErr]);
   audioFileStream = nil;
 }
 
