@@ -69,31 +69,26 @@
                                                       [NSString stringWithFormat:@"" __VA_ARGS__]];\
       LOG_FATAL(@"%@", reason);\
     }\
-} while(0)
+  } while(0)
 #endif
 
 /* Logging */
-#define LOG_LEVEL_NONE 0
-#define LOG_LEVEL_FATAL 1
-#define LOG_LEVEL_ERROR 2
-#define LOG_LEVEL_WARN 3
-#define LOG_LEVEL_INFO 4
-#define LOG_LEVEL_DEBUG 5
-#define LOG_LEVEL_VERBOSE 6
-
-#if defined(DEBUG)
-#define LOG_LEVEL LOG_LEVEL_DEBUG
-#else
-#define LOG_LEVEL LOG_LEVEL_ERROR
-#endif
-
-#define LOG(lvl, fmt, args...) if (lvl <= LOG_LEVEL) NSLog(@"%s " fmt, __PRETTY_FUNCTION__, ##args)
-#define LOG_FATAL(fmt, args...) LOG(LOG_LEVEL_FATAL, fmt, ##args)
-#define LOG_ERROR(fmt, args...) LOG(LOG_LEVEL_ERROR, fmt, ##args)
-#define LOG_WARN(fmt, args...) LOG(LOG_LEVEL_WARN, fmt, ##args)
-#define LOG_INFO(fmt, args...) LOG(LOG_LEVEL_INFO, fmt, ##args)
-#define LOG_DEBUG(fmt, args...) LOG(LOG_LEVEL_DEBUG, fmt, ##args)
-#define LOG_VERBOSE(fmt, args...) LOG(LOG_LEVEL_VERBOSE, fmt, ##args)
+#define LOG(lvl, fmt, args...)\
+  do {\
+    if (lvl <= [self logLevel]) {\
+      NSString *msg = [NSString stringWithFormat:@"%s " fmt, __PRETTY_FUNCTION__, ##args];\
+      if ([self logHandler])\
+        [self logHandler](msg);\
+      else\
+        NSLog(@"%@", msg);\
+    }\
+  } while (0)
+#define LOG_FATAL(fmt, args...) LOG(AS_LOG_LEVEL_FATAL, fmt, ##args)
+#define LOG_ERROR(fmt, args...) LOG(AS_LOG_LEVEL_ERROR, fmt, ##args)
+#define LOG_WARN(fmt, args...) LOG(AS_LOG_LEVEL_WARN, fmt, ##args)
+#define LOG_INFO(fmt, args...) LOG(AS_LOG_LEVEL_INFO, fmt, ##args)
+#define LOG_DEBUG(fmt, args...) LOG(AS_LOG_LEVEL_DEBUG, fmt, ##args)
+#define LOG_VERBOSE(fmt, args...) LOG(AS_LOG_LEVEL_VERBOSE, fmt, ##args)
 
 typedef NS_ENUM(NSUInteger, AudioStreamerProxyType) {
   AS_PROXY_SYSTEM = 0,
@@ -222,6 +217,11 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
     _bufferFillCountToStart = kDefaultNumAQBufsToStart;
     _timeoutInterval = 10;
     _playbackRate = 1.0f;
+#if defined(DEBUG)
+    _logLevel = AS_LOG_LEVEL_INFO;
+#else
+    _logLevel = AS_LOG_LEVEL_ERROR;
+#endif
   }
   return self;
 }

@@ -213,6 +213,48 @@ typedef NS_ENUM(NSInteger, AudioStreamerDoneReason) {
   AS_DONE_EOF = 2
 };
 
+/**
+ * Log levels. Used to filter out certain levels of logging.
+ * 
+ * Each level down the chain towards verbose will include the previous log levels.
+ * For example, AS_LOG_LEVEL_WARN will include AS_LOG_LEVEL_ERROR and AS_LOG_LEVEL_FATAL.
+ *
+ * See <[AudioStreamer logLevel]> for more information.
+ */
+typedef NS_ENUM(NSUInteger, AudioStreamerLogLevel) {
+	/**
+	 * No logging will occur.
+	 */
+	AS_LOG_LEVEL_NONE = 0,
+	/**
+	 * Logging will only occur in the event of a fatal error such as an assertion.
+	 */
+	AS_LOG_LEVEL_FATAL,
+	/**
+	 * Logging will occur when the streamer encounters a error that has caused the streamer
+	 * to stop.
+	 */
+	AS_LOG_LEVEL_ERROR,
+	/**
+	 * Logging will occur when the streamer encounters an issue but not necessarily one that
+	 * has resulted in the streamer having to stop.
+	 */
+	AS_LOG_LEVEL_WARN,
+	/**
+	 * Logging will occur when the streamer has reached a point of interest in its streaming.
+	 */
+	AS_LOG_LEVEL_INFO,
+	/**
+	 * Logging will occur when the streamer has information that may be useful when debugging
+	 * the streamer.
+	 */
+	AS_LOG_LEVEL_DEBUG,
+	/**
+	 * Logging will occur at most steps in the streamer's process. Expect a lot of logs!
+	 */
+	AS_LOG_LEVEL_VERBOSE
+};
+
 /* Notifications */
 extern NSString * const ASStatusChangedNotification DEPRECATED_MSG_ATTRIBUTE("Use AudioStreamerDelegate instead.");
 extern NSString * const ASBitrateReadyNotification DEPRECATED_MSG_ATTRIBUTE("Use AudioStreamerDelegate instead.");
@@ -729,6 +771,26 @@ struct queued_cbr_packet;
  * @available iOS 7 and later, all supported OS X versions
  */
 @property (readwrite) float playbackRate;
+
+/**
+ * @brief The log level to use
+ *
+ * @details Default: AS_LOG_LEVEL_INFO on debug builds; AS_LOG_LEVEL_ERROR on
+ * release builds.
+ *
+ * @see AudioStreamerLogLevel
+ */
+@property (readwrite) AudioStreamerLogLevel logLevel;
+
+/**
+ * @brief A callback to override the logging in AudioStreamer.
+ *
+ * @details When set to nil, NSLog will be called for logging. Set this property
+ * if you want to log using your only logging function.
+ *
+ * Default: nil
+ */
+@property (readwrite, copy) void (^logHandler)(NSString *);
 
 /**
  * @brief Set an HTTP proxy for this stream
