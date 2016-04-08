@@ -66,6 +66,8 @@
 {
 	if (streamer)
 	{
+		[progressSlider setEnabled:NO];
+
 		[progressUpdateTimer invalidate];
 		progressUpdateTimer = nil;
 
