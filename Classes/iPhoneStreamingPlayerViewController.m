@@ -115,10 +115,6 @@
 {
 	[super viewDidLoad];
 
-	MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame:volumeSlider.bounds];
-	[volumeSlider addSubview:volumeView];
-	[volumeView sizeToFit];
-
 	[self setButtonImage:[UIImage imageNamed:@"playbutton.png"]];
 }
 

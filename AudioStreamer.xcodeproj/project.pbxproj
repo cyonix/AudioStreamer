@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		050C4AD61CB7C334003BAFD0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 050C4AD51CB7C334003BAFD0 /* Images.xcassets */; };
+		050C4AD91CB7D016003BAFD0 /* ASVolumeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050C4AD81CB7D016003BAFD0 /* ASVolumeView.m */; };
 		0515892D19C97761004A1E00 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0515892C19C97761004A1E00 /* CFNetwork.framework */; };
 		0515893419C9798A004A1E00 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0515893319C9798A004A1E00 /* MediaPlayer.framework */; };
 		0515893819C97E19004A1E00 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0515893719C97E19004A1E00 /* AVFoundation.framework */; };
@@ -87,6 +88,8 @@
 
 /* Begin PBXFileReference section */
 		050C4AD51CB7C334003BAFD0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "iPhone Streaming Player/Images.xcassets"; sourceTree = SOURCE_ROOT; };
+		050C4AD71CB7D016003BAFD0 /* ASVolumeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASVolumeView.h; sourceTree = "<group>"; };
+		050C4AD81CB7D016003BAFD0 /* ASVolumeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASVolumeView.m; sourceTree = "<group>"; };
 		0515892C19C97761004A1E00 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
 		0515893319C9798A004A1E00 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
 		0515893719C97E19004A1E00 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
@@ -237,6 +240,8 @@
 				97B9D035158AD53B0085BC63 /* iPhoneStreamingPlayerViewController.m */,
 				0529A1691A8CB9F5007D3B6E /* UIBufferSlider.h */,
 				0529A16A1A8CB9F5007D3B6E /* UIBufferSlider.m */,
+				050C4AD71CB7D016003BAFD0 /* ASVolumeView.h */,
+				050C4AD81CB7D016003BAFD0 /* ASVolumeView.m */,
 				97B9D036158AD53B0085BC63 /* MacStreamingPlayerController.h */,
 				97B9D037158AD53B0085BC63 /* MacStreamingPlayerController.m */,
 				05A1D58D1A8BC53300FE0BA4 /* NSBufferSlider.h */,
@@ -508,6 +513,7 @@
 				97B9D08B158ADDBA0085BC63 /* iPhoneStreamingPlayerAppDelegate.m in Sources */,
 				97B9D08C158ADDBA0085BC63 /* iPhoneStreamingPlayerViewController.m in Sources */,
 				0529A16B1A8CB9F5007D3B6E /* UIBufferSlider.m in Sources */,
+				050C4AD91CB7D016003BAFD0 /* ASVolumeView.m in Sources */,
 				97B9D08A158ADDB20085BC63 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
