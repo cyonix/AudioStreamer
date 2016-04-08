@@ -70,11 +70,7 @@
     if (barRect.size.height != 0) _trackRect = barRect;
     else barRect = _trackRect;
 
-    if (![self isEnabled]) {
-        [[UIColor lightGrayColor] set];
-    } else {
-        [[UIColor grayColor] set];
-    }
+    [[UIColor colorWithWhite:(CGFloat)0.72 alpha:(CGFloat)1.0] set];
     [self drawRoundedHalfBarInRect:barRect parentRect:barRect];
 
     [[UIColor redColor] set];
