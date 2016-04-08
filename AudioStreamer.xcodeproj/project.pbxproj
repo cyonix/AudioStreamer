@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		050C4AD61CB7C334003BAFD0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 050C4AD51CB7C334003BAFD0 /* Images.xcassets */; };
 		0515892D19C97761004A1E00 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0515892C19C97761004A1E00 /* CFNetwork.framework */; };
 		0515893419C9798A004A1E00 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0515893319C9798A004A1E00 /* MediaPlayer.framework */; };
-		0515893619C97B91004A1E00 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0515893519C97B91004A1E00 /* Default-568h@2x.png */; };
 		0515893819C97E19004A1E00 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0515893719C97E19004A1E00 /* AVFoundation.framework */; };
 		0529A16B1A8CB9F5007D3B6E /* UIBufferSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 0529A16A1A8CB9F5007D3B6E /* UIBufferSlider.m */; };
 		0529A16D1A8CBDBD007D3B6E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0529A16C1A8CBDBD007D3B6E /* CoreGraphics.framework */; };
@@ -86,9 +86,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		050C4AD51CB7C334003BAFD0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "iPhone Streaming Player/Images.xcassets"; sourceTree = SOURCE_ROOT; };
 		0515892C19C97761004A1E00 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
 		0515893319C9798A004A1E00 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
-		0515893519C97B91004A1E00 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		0515893719C97E19004A1E00 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		0529A1691A8CB9F5007D3B6E /* UIBufferSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBufferSlider.h; sourceTree = "<group>"; usesTabs = 0; };
 		0529A16A1A8CB9F5007D3B6E /* UIBufferSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBufferSlider.m; sourceTree = "<group>"; usesTabs = 0; };
@@ -273,7 +273,7 @@
 		97B9D060158ADD6C0085BC63 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
-				0515893519C97B91004A1E00 /* Default-568h@2x.png */,
+				050C4AD51CB7C334003BAFD0 /* Images.xcassets */,
 				97B9D061158ADD6C0085BC63 /* iPhoneStreamingPlayerViewController.xib */,
 				97B9D062158ADD6C0085BC63 /* MainWindow.xib */,
 			);
@@ -450,11 +450,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				97B9D08E158ADDD00085BC63 /* iPhoneStreamingPlayerViewController.xib in Resources */,
+				050C4AD61CB7C334003BAFD0 /* Images.xcassets in Resources */,
 				97B9D08F158ADDD00085BC63 /* MainWindow.xib in Resources */,
 				97B9D090158ADDD00085BC63 /* loadingbutton.png in Resources */,
 				97B9D091158ADDD00085BC63 /* pausebutton.png in Resources */,
 				97B9D092158ADDD00085BC63 /* playbutton.png in Resources */,
-				0515893619C97B91004A1E00 /* Default-568h@2x.png in Resources */,
 				97B9D093158ADDD00085BC63 /* stopbutton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -789,6 +789,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -816,6 +818,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
