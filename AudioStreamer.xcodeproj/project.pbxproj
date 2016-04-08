@@ -402,6 +402,15 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0700;
+				TargetAttributes = {
+					97B9D066158ADD910085BC63 = {
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
+				};
 			};
 			buildConfigurationList = 973BB667158AD07000A7D459 /* Build configuration list for PBXProject "AudioStreamer" */;
 			compatibilityVersion = "Xcode 3.2";
