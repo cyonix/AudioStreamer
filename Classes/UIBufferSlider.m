@@ -10,6 +10,12 @@
 
 #define DEGREES_TO_RADIANS(angle) (CGFloat)((angle) / 180.0 * M_PI)
 
+@interface UIBufferSlider()
+
+@property (nonatomic, assign) CGRect trackRect;
+
+@end
+
 @implementation UIBufferSlider
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -61,6 +67,8 @@
     [super drawRect:outerRect];
 
     CGRect barRect = [self trackRectForBounds:outerRect];
+    if (barRect.size.height != 0) _trackRect = barRect;
+    else barRect = _trackRect;
 
     if (![self isEnabled]) {
         [[UIColor lightGrayColor] set];
@@ -83,11 +91,8 @@
     progressRect.size.width *= [self value] / 100;
     [self drawRoundedHalfBarInRect:progressRect parentRect:barRect];
 
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(1.0, 1.0), NO, 0.0);
-    UIImage *transparent = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    [self setMinimumTrackImage:transparent forState:UIControlStateNormal];
-    [self setMaximumTrackImage:transparent forState:UIControlStateNormal];
+    [self setMinimumTrackImage:[UIImage alloc] forState:UIControlStateNormal];
+    [self setMaximumTrackImage:[UIImage alloc] forState:UIControlStateNormal];
 }
 
 - (void)setValue:(float)value
