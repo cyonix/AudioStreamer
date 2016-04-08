@@ -60,18 +60,7 @@
 - (void)drawRect:(CGRect)outerRect {
     [super drawRect:outerRect];
 
-    CGFloat dy, y;
-    if (NSFoundationVersionNumber >= NSFoundationVersionNumber_iOS_7_0) {
-        dy = 11.0;
-        y = 0.0;
-    } else {
-        dy = 8.0;
-        y = -1.0;
-    }
-
-    CGRect barRect = CGRectInset(outerRect, 2.0, dy);
-    barRect.size.height += 1;
-    barRect.origin.y += y;
+    CGRect barRect = [self trackRectForBounds:outerRect];
 
     if (![self isEnabled]) {
         [[UIColor lightGrayColor] set];
