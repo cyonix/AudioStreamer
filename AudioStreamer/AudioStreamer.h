@@ -86,11 +86,6 @@ typedef NS_ENUM(NSUInteger, AudioStreamerState) {
 typedef NS_ENUM(NSInteger, AudioStreamerErrorCode)
 {
   /**
-   * No error has occurred
-   * @deprecated Unused with the new error property. Check if the [AudioStreamer error] property is nil or not
-   */
-  AS_NO_ERROR DEPRECATED_MSG_ATTRIBUTE("Unused with the new error property. Check if the error property is nil or not.") = 0,
-  /**
    * The network connection to the stream has failed
    */
   AS_NETWORK_CONNECTION_FAILED = 1000,
@@ -103,11 +98,6 @@ typedef NS_ENUM(NSInteger, AudioStreamerErrorCode)
    */
   AS_FILE_STREAM_SET_PROPERTY_FAILED = 1002,
   /**
-   * An error occurred when attempting to seek the file stream
-   * @deprecated Unused
-   */
-  AS_FILE_STREAM_SEEK_FAILED DEPRECATED_MSG_ATTRIBUTE("Unused.") = 1003,
-  /**
    * The file stream threw an error when parsing the stream data
    */
   AS_FILE_STREAM_PARSE_BYTES_FAILED = 1004,
@@ -115,11 +105,6 @@ typedef NS_ENUM(NSInteger, AudioStreamerErrorCode)
    * The file stream threw an error when opening
    */
   AS_FILE_STREAM_OPEN_FAILED = 1005,
-  /**
-   * The file stream threw an error when closing
-   * @deprecated Unused. Closing happens when the stream is stopping and so it's too late to fail
-   */
-  AS_FILE_STREAM_CLOSE_FAILED DEPRECATED_MSG_ATTRIBUTE("Unused. Closing happens when the stream is stopping and so it's too late to fail.") = 1006,
   /**
    * No audio could be found in stream
    */
@@ -141,11 +126,6 @@ typedef NS_ENUM(NSInteger, AudioStreamerErrorCode)
    */
   AS_AUDIO_QUEUE_ADD_LISTENER_FAILED = 1011,
   /**
-   * The audio queue (player) threw an error when removing a property listener
-   * @deprecated Unused
-   */
-  AS_AUDIO_QUEUE_REMOVE_LISTENER_FAILED DEPRECATED_MSG_ATTRIBUTE("Unused.") = 1012,
-  /**
    * The audio queue (player) threw an error on start
    */
   AS_AUDIO_QUEUE_START_FAILED = 1013,
@@ -159,11 +139,6 @@ typedef NS_ENUM(NSInteger, AudioStreamerErrorCode)
    */
   AS_AUDIO_QUEUE_BUFFER_MISMATCH = 1015,
   /**
-   * The audio queue (player) threw an error on disposal
-   * @deprecated Unused. Disposing happens when the stream is stopping and so it's too late to fail
-   */
-  AS_AUDIO_QUEUE_DISPOSE_FAILED DEPRECATED_MSG_ATTRIBUTE("Unused. Disposing happens when the stream is stopping and so it's too late to fail.") = 1016,
-  /**
    * The audio queue (player) threw an error on stop
    */
   AS_AUDIO_QUEUE_STOP_FAILED = 1017,
@@ -171,16 +146,6 @@ typedef NS_ENUM(NSInteger, AudioStreamerErrorCode)
    * The audio queue (player) threw an error while flushing
    */
   AS_AUDIO_QUEUE_FLUSH_FAILED = 1018,
-  /**
-   * Generic error
-   * @deprecated No longer used in favour of more specific errors
-   */
-  AS_AUDIO_STREAMER_FAILED DEPRECATED_MSG_ATTRIBUTE("No longer used in favour of more specific errors.") = 1019,
-  /**
-   * Fetching of the current progress failed
-   * @deprecated The [AudioStreamer progress:] method will return NO instead
-   */
-  AS_GET_AUDIO_TIME_FAILED DEPRECATED_MSG_ATTRIBUTE("Unused. The progress: method will return NO instead.") = 1020,
   /**
    * The buffer size is too small. Try increasing <[AudioStreamer bufferSize]>
    */
@@ -254,10 +219,6 @@ typedef NS_ENUM(NSUInteger, AudioStreamerLogLevel) {
 	 */
 	AS_LOG_LEVEL_VERBOSE
 };
-
-/* Notifications */
-extern NSString * const ASStatusChangedNotification DEPRECATED_MSG_ATTRIBUTE("Use AudioStreamerDelegate instead.");
-extern NSString * const ASBitrateReadyNotification DEPRECATED_MSG_ATTRIBUTE("Use AudioStreamerDelegate instead.");
 
 enum AudioStreamerProxyType : NSUInteger;
 enum AudioStreamerID3ParserState : NSUInteger;
@@ -580,41 +541,6 @@ struct queued_cbr_packet;
 @property (readonly) NSError *error;
 
 /**
- * @brief The error code the streamer threw
- * @deprecated Use the -code method from the 'error' property instead
- *
- * @details If an error occurs on the stream, then this variable is set with the code
- * corresponding to the error
- *
- * By default this is AS_NO_ERROR.
- *
- * @see AudioStreamerErrorCode
- */
-@property (readonly) AudioStreamerErrorCode errorCode
-  __attribute__((deprecated("Use the -code method from the 'error' property instead.")));
-
-/**
- * @brief Converts an error code to a string
- * @deprecated Use the -localizedDescription method from the 'error' property instead
- *
- * @param anErrorCode The code to convert, usually from the <errorCode> property
- * @return The string description of the error code (as best as possible)
- */
-+ (NSString*)stringForErrorCode:(AudioStreamerErrorCode)anErrorCode
-  __attribute__((deprecated("Use the -localizedDescription method from the 'error' property instead.")));
-
-/**
- * @brief The network error the streamer threw
- * @deprecated Use the -localizedFailureReason method from 'error' property instead
- *
- * On AS_NETWORK_CONNECTION_FAILED, this will contain the error details
- *
- * @warning AS_TIMED_OUT no longer sets this property as no other info is given
- */
-@property (readonly) NSError *networkError
-  __attribute__((deprecated("Use the -localizedFailureReason method from the 'error' property instead.")));
-
-/**
  * @brief Headers received from the remote source
  *
  * @details Used to determine file size, but other information may be useful as well
@@ -649,8 +575,6 @@ struct queued_cbr_packet;
  * The current song field is sometimes used as the stream title on some ICY streams.
  */
 @property (readonly) NSString *currentSong;
-
-@property (readwrite) UInt32 bufferCnt __attribute__((unavailable("Use the 'bufferCount' property instead.")));
 
 /**
  * @brief The number of audio buffers to have

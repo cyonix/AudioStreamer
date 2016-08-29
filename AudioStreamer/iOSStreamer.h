@@ -78,5 +78,3 @@
 @property (readonly, getter=isInterrupted) BOOL interrupted;
 
 @end
-
-@compatibility_alias iPhoneStreamer iOSStreamer; // Backwards compatibility

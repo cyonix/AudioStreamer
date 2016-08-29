@@ -130,16 +130,8 @@ typedef struct buffer {
 /* Errors, not an 'extern' */
 NSString * const ASErrorDomain = @"com.alexcrichton.audiostreamer";
 
-/* Notifications - deprecated. Defines to avoid internal warning */
-#define _ASStatusChangedNotification @"ASStatusChangedNotification"
-NSString * const ASStatusChangedNotification = _ASStatusChangedNotification;
-#define _ASBitrateReadyNotification @"ASBitrateReadyNotification"
-NSString * const ASBitrateReadyNotification = _ASBitrateReadyNotification;
-
 /* Woohoo, actual implementation now! */
 @implementation AudioStreamer
-
-@dynamic bufferCnt; // Unavailable property
 
 /* Converts a given OSStatus to a friendly string.
  * The return value should be freed when done */
@@ -800,36 +792,20 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
   return [self fadeTo:0.0 duration:duration];
 }
 
-#pragma mark - Deprecated methods
-
-- (AudioStreamerErrorCode)errorCode {
-  return [_error code];
-}
-
-+ (NSString *)stringForErrorCode:(AudioStreamerErrorCode)anErrorCode {
-  return [[self class] descriptionForASErrorCode:anErrorCode]; // Internal method.
-}
-
 #pragma mark - Internal methods
 
 + (NSString *)descriptionForASErrorCode:(AudioStreamerErrorCode)anErrorCode {
   switch (anErrorCode) {
-    case 0: /* Deprecated */
-      return @"No error";
     case AS_NETWORK_CONNECTION_FAILED:
       return @"Network connection failure";
     case AS_FILE_STREAM_GET_PROPERTY_FAILED:
       return @"File stream get property failed";
     case AS_FILE_STREAM_SET_PROPERTY_FAILED:
       return @"File stream set property failed";
-    case 1003: /* AS_FILE_STREAM_SEEK_FAILED - Deprecated */
-      return @"File stream seek failed";
     case AS_FILE_STREAM_PARSE_BYTES_FAILED:
       return @"Parse bytes failed";
     case AS_FILE_STREAM_OPEN_FAILED:
       return @"Failed to open file stream";
-    case 1006: /* AS_FILE_STREAM_CLOSE_FAILED - Deprecated */
-      return @"Failed to close the file stream";
     case AS_AUDIO_DATA_NOT_FOUND:
       return @"No audio data found";
     case AS_AUDIO_QUEUE_CREATION_FAILED:
@@ -840,24 +816,16 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
       return @"Queueing of audio buffer failed";
     case AS_AUDIO_QUEUE_ADD_LISTENER_FAILED:
       return @"Failed to add listener to audio queue";
-    case 1012: /* AS_AUDIO_QUEUE_REMOVE_LISTENER_FAILED - Deprecated */
-      return @"Failed to remove listener from audio queue";
     case AS_AUDIO_QUEUE_START_FAILED:
       return @"Failed to start the audio queue";
     case AS_AUDIO_QUEUE_PAUSE_FAILED:
       return @"Failed to pause the audio queue";
     case AS_AUDIO_QUEUE_BUFFER_MISMATCH:
       return @"Audio queue buffer mismatch";
-    case 1016: /* AS_AUDIO_QUEUE_DISPOSE_FAILED - Deprecated */
-      return @"Couldn't dispose of audio queue";
     case AS_AUDIO_QUEUE_STOP_FAILED:
       return @"Audio queue stop failed";
     case AS_AUDIO_QUEUE_FLUSH_FAILED:
       return @"Failed to flush the audio queue";
-    case 1019: /* AS_AUDIO_STREAMER_FAILED - Deprecated */
-      return @"Audio streamer failed";
-    case 1020: /* AS_GET_AUDIO_TIME_FAILED - Deprecated */
-      return @"Couldn't get audio time";
     case AS_AUDIO_BUFFER_TOO_SMALL:
       return @"Audio buffer too small";
     case AS_TIMED_OUT:
@@ -1033,9 +1001,6 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
 }
 
 - (void)notifyStateChange {
-  [[NSNotificationCenter defaultCenter]
-        postNotificationName:_ASStatusChangedNotification // Deprecated
-                      object:self];
   __strong id <AudioStreamerDelegate> delegate = _delegate;
   if (delegate && [delegate respondsToSelector:@selector(streamerStatusDidChange:)]) {
     [delegate streamerStatusDidChange:self];
@@ -1288,16 +1253,16 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
   events++;
 
   switch (eventType) {
-    case kCFStreamEventErrorOccurred:
+    case kCFStreamEventErrorOccurred: {
       LOG_INFO(@"error");
       /* Deprecated. Will eventually be a local variable. */
-      _networkError = (__bridge_transfer NSError*) CFReadStreamCopyError(aStream);
+      NSError *networkError = (__bridge_transfer NSError*) CFReadStreamCopyError(aStream);
       if (!_error) {
         if (buffersUsed != 0) {
           /* shouldStop = NO as we will retry connecting later */
-          [self failWithErrorCode:AS_NETWORK_CONNECTION_FAILED reason:[_networkError localizedDescription] shouldStop:NO];
+          [self failWithErrorCode:AS_NETWORK_CONNECTION_FAILED reason:[networkError localizedDescription] shouldStop:NO];
         } else {
-          [self failWithErrorCode:AS_NETWORK_CONNECTION_FAILED reason:[_networkError localizedDescription] shouldStop:YES];
+          [self failWithErrorCode:AS_NETWORK_CONNECTION_FAILED reason:[networkError localizedDescription] shouldStop:YES];
         }
       } else {
         /* We tried reconnecting but failed. Time to stop. */
@@ -1306,7 +1271,7 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
         [self notifyStateChange];
       }
       return;
-
+    }
     case kCFStreamEventEndEncountered:
       LOG_INFO(@"end");
       [timeout invalidate];
@@ -2308,9 +2273,6 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
   if (processedPacketsCount > BitRateEstimationMinPackets &&
       !bitrateNotification) {
     bitrateNotification = true;
-    [[NSNotificationCenter defaultCenter]
-          postNotificationName:_ASBitrateReadyNotification // Deprecated
-                        object:self];
     __strong id <AudioStreamerDelegate> delegate = _delegate;
     if (delegate && [delegate respondsToSelector:@selector(streamerBitrateIsReady:)]) {
       [delegate streamerBitrateIsReady:self];
@@ -2366,9 +2328,6 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
   // It's safe to calculate the bitrate as soon as we start getting audio.
   if (!bitrateNotification) {
     bitrateNotification = true;
-    [[NSNotificationCenter defaultCenter]
-          postNotificationName:_ASBitrateReadyNotification // Deprecated
-                        object:self];
     __strong id <AudioStreamerDelegate> delegate = _delegate;
     if (delegate && [delegate respondsToSelector:@selector(streamerBitrateIsReady:)]) {
       [delegate streamerBitrateIsReady:self];
