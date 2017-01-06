@@ -30,6 +30,7 @@
 - (void)setBufferValue:(double)bufferValue
 {
     [[self cell] setBufferValue:MIN(bufferValue, 100.0)];
+    [self setNeedsDisplay];
 }
 
 
