@@ -97,6 +97,8 @@
 	streamer = [iOSStreamer streamWithURL:url];
 	[streamer setDelegate:self];
 
+	[self setButtonImage:[UIImage imageNamed:@"loadingbutton.png"]];
+
 	progressUpdateTimer =
 		[NSTimer
 			scheduledTimerWithTimeInterval:0.1
@@ -185,7 +187,6 @@
 		[downloadSourceField resignFirstResponder];
 
 		[self createStreamer];
-		[self setButtonImage:[UIImage imageNamed:@"loadingbutton.png"]];
 		[streamer start];
 	}
 	else

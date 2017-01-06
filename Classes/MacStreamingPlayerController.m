@@ -105,6 +105,8 @@
 	streamer = [AudioStreamer streamWithURL:url];
 	[streamer setDelegate:self];
 
+	[self setButtonImage:[NSImage imageNamed:@"loadingbutton"]];
+
 	progressUpdateTimer =
 		[NSTimer
 			scheduledTimerWithTimeInterval:0.1
@@ -193,7 +195,6 @@
 		[window makeFirstResponder:nil];
 
 		[self createStreamer];
-		[self setButtonImage:[NSImage imageNamed:@"loadingbutton"]];
 		[streamer start];
 	}
 	else
