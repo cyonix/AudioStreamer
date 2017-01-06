@@ -20,11 +20,8 @@
 
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
-    if ((self = [super initWithCoder:coder])) {
-        NSBufferSliderCell *cell = [[[[self class] cellClass] alloc] init];
-        [cell setState:1];
-        [cell setMaxValue:100.0];
-        [self setCell:cell];
+    if ((self = [super initWithCoder:coder]))
+    {
         [self setContinuous:NO];
     }
     return self;

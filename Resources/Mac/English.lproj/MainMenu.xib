@@ -581,7 +581,7 @@
                     <slider verticalHuggingPriority="750" id="465" customClass="NSBufferSlider">
                         <rect key="frame" x="91" y="43" width="361" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="466"/>
+                        <sliderCell key="cell" enabled="NO" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="466" customClass="NSBufferSliderCell"/>
                         <connections>
                             <action selector="sliderMoved:" target="458" id="469"/>
                         </connections>
