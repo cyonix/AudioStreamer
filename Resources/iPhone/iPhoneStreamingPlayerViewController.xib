@@ -66,7 +66,7 @@
                     <rect key="frame" x="20" y="385" width="280" height="55"/>
                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
-                <slider opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="46" customClass="UIBufferSlider">
+                <slider opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="100" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="46" customClass="UIBufferSlider">
                     <rect key="frame" x="18" y="204" width="284" height="31"/>
                     <connections>
                         <action selector="sliderMoved:" destination="-1" eventType="valueChanged" id="48"/>
