@@ -322,6 +322,7 @@
 {
 	[sender resignFirstResponder];
 	[self createStreamer];
+	[streamer start];
 	return YES;
 }
 
