@@ -18,6 +18,25 @@
 		0595FA0C1A36FBB600AE7040 /* libAudioStreamer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4965F2D91824D40700EF8875 /* libAudioStreamer.a */; };
 		05A1D58F1A8BC53300FE0BA4 /* NSBufferSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A1D58E1A8BC53300FE0BA4 /* NSBufferSlider.m */; };
 		05A1D5921A8BCC6700FE0BA4 /* NSBufferSliderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A1D5911A8BCC6700FE0BA4 /* NSBufferSliderCell.m */; };
+		05DCD5B01D749BE3008BDCC2 /* ASCFReadStreamHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 05DCD5AE1D749BE3008BDCC2 /* ASCFReadStreamHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		05DCD5B11D749BE3008BDCC2 /* ASCFReadStreamHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DCD5AF1D749BE3008BDCC2 /* ASCFReadStreamHandler.m */; };
+		05DCD5B21D749BE3008BDCC2 /* ASCFReadStreamHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DCD5AF1D749BE3008BDCC2 /* ASCFReadStreamHandler.m */; };
+		05DCD5B71D74AACB008BDCC2 /* ASLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 05DCD5B51D74AACB008BDCC2 /* ASLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		05DCD5B81D74AACB008BDCC2 /* ASLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DCD5B61D74AACB008BDCC2 /* ASLogger.m */; };
+		05DCD5B91D74AACB008BDCC2 /* ASLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DCD5B61D74AACB008BDCC2 /* ASLogger.m */; };
+		05DCD5BC1D74B97B008BDCC2 /* ASAudioFileStreamHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 05DCD5BA1D74B97B008BDCC2 /* ASAudioFileStreamHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		05DCD5BD1D74B97B008BDCC2 /* ASAudioFileStreamHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DCD5BB1D74B97B008BDCC2 /* ASAudioFileStreamHandler.m */; };
+		05DCD5BE1D74B97B008BDCC2 /* ASAudioFileStreamHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DCD5BB1D74B97B008BDCC2 /* ASAudioFileStreamHandler.m */; };
+		05DCD5C11D75FAA4008BDCC2 /* ASAudioQueueHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 05DCD5BF1D75FAA4008BDCC2 /* ASAudioQueueHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		05DCD5C21D75FAA4008BDCC2 /* ASAudioQueueHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DCD5C01D75FAA4008BDCC2 /* ASAudioQueueHandler.m */; };
+		05DCD5C31D75FAA4008BDCC2 /* ASAudioQueueHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DCD5C01D75FAA4008BDCC2 /* ASAudioQueueHandler.m */; };
+		05F859EC1E1D53CE000AE8A7 /* ASInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 05F859EB1E1D5373000AE8A7 /* ASInternal.h */; };
+		05FAA0391E1F23B10051B418 /* ASInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FAA0381E1F23B10051B418 /* ASInternal.m */; };
+		05FAA03D1E1FF3280051B418 /* ASiOSAudioQueueHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FAA03C1E1FF3280051B418 /* ASiOSAudioQueueHandler.m */; };
+		05FAA0401E20140F0051B418 /* ASProxyInformation.h in Headers */ = {isa = PBXBuildFile; fileRef = 05FAA03E1E20140F0051B418 /* ASProxyInformation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		05FAA0411E20140F0051B418 /* ASProxyInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FAA03F1E20140F0051B418 /* ASProxyInformation.m */; };
+		05FAA0421E20140F0051B418 /* ASProxyInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FAA03F1E20140F0051B418 /* ASProxyInformation.m */; };
+		05FAA0431E202F520051B418 /* ASInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FAA0381E1F23B10051B418 /* ASInternal.m */; };
 		4965F2FE1824D48A00EF8875 /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B9D008158AD12F0085BC63 /* AudioStreamer.m */; };
 		4965F2FF1824D48A00EF8875 /* ASPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = FA99E25215E4B6E1005AB6E6 /* ASPlaylist.m */; };
 		97B9D009158AD12F0085BC63 /* AudioStreamer.h in Headers */ = {isa = PBXBuildFile; fileRef = 97B9D007158AD12F0085BC63 /* AudioStreamer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -100,8 +119,22 @@
 		05A1D58E1A8BC53300FE0BA4 /* NSBufferSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSBufferSlider.m; sourceTree = "<group>"; usesTabs = 0; };
 		05A1D5901A8BCC6700FE0BA4 /* NSBufferSliderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSBufferSliderCell.h; sourceTree = "<group>"; usesTabs = 0; };
 		05A1D5911A8BCC6700FE0BA4 /* NSBufferSliderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSBufferSliderCell.m; sourceTree = "<group>"; usesTabs = 0; };
+		05DCD5AE1D749BE3008BDCC2 /* ASCFReadStreamHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASCFReadStreamHandler.h; sourceTree = "<group>"; usesTabs = 0; };
+		05DCD5AF1D749BE3008BDCC2 /* ASCFReadStreamHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASCFReadStreamHandler.m; sourceTree = "<group>"; usesTabs = 0; };
+		05DCD5B51D74AACB008BDCC2 /* ASLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASLogger.h; sourceTree = "<group>"; usesTabs = 0; };
+		05DCD5B61D74AACB008BDCC2 /* ASLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASLogger.m; sourceTree = "<group>"; usesTabs = 0; };
+		05DCD5BA1D74B97B008BDCC2 /* ASAudioFileStreamHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASAudioFileStreamHandler.h; sourceTree = "<group>"; usesTabs = 0; };
+		05DCD5BB1D74B97B008BDCC2 /* ASAudioFileStreamHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASAudioFileStreamHandler.m; sourceTree = "<group>"; usesTabs = 0; };
+		05DCD5BF1D75FAA4008BDCC2 /* ASAudioQueueHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASAudioQueueHandler.h; sourceTree = "<group>"; usesTabs = 0; };
+		05DCD5C01D75FAA4008BDCC2 /* ASAudioQueueHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASAudioQueueHandler.m; sourceTree = "<group>"; usesTabs = 0; };
 		05DFC73D15FA47420008E6D8 /* iOSStreamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSStreamer.h; sourceTree = "<group>"; usesTabs = 0; };
 		05DFC73E15FA47420008E6D8 /* iOSStreamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSStreamer.m; sourceTree = "<group>"; usesTabs = 0; };
+		05F859EB1E1D5373000AE8A7 /* ASInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASInternal.h; sourceTree = "<group>"; usesTabs = 0; };
+		05FAA0381E1F23B10051B418 /* ASInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASInternal.m; sourceTree = "<group>"; usesTabs = 0; };
+		05FAA03B1E1FF3280051B418 /* ASiOSAudioQueueHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASiOSAudioQueueHandler.h; sourceTree = "<group>"; usesTabs = 0; };
+		05FAA03C1E1FF3280051B418 /* ASiOSAudioQueueHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASiOSAudioQueueHandler.m; sourceTree = "<group>"; usesTabs = 0; };
+		05FAA03E1E20140F0051B418 /* ASProxyInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASProxyInformation.h; sourceTree = "<group>"; usesTabs = 0; };
+		05FAA03F1E20140F0051B418 /* ASProxyInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASProxyInformation.m; sourceTree = "<group>"; usesTabs = 0; };
 		4965F2D91824D40700EF8875 /* libAudioStreamer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAudioStreamer.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		97B9CFE1158AD09B0085BC63 /* AudioStreamer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AudioStreamer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		97B9CFE4158AD09B0085BC63 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -186,6 +219,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		05DCD5AD1D749A89008BDCC2 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				05F859EB1E1D5373000AE8A7 /* ASInternal.h */,
+				05FAA0381E1F23B10051B418 /* ASInternal.m */,
+				05DCD5B51D74AACB008BDCC2 /* ASLogger.h */,
+				05DCD5B61D74AACB008BDCC2 /* ASLogger.m */,
+				05FAA03E1E20140F0051B418 /* ASProxyInformation.h */,
+				05FAA03F1E20140F0051B418 /* ASProxyInformation.m */,
+				05DCD5AE1D749BE3008BDCC2 /* ASCFReadStreamHandler.h */,
+				05DCD5AF1D749BE3008BDCC2 /* ASCFReadStreamHandler.m */,
+				05DCD5BA1D74B97B008BDCC2 /* ASAudioFileStreamHandler.h */,
+				05DCD5BB1D74B97B008BDCC2 /* ASAudioFileStreamHandler.m */,
+				05DCD5BF1D75FAA4008BDCC2 /* ASAudioQueueHandler.h */,
+				05DCD5C01D75FAA4008BDCC2 /* ASAudioQueueHandler.m */,
+				05FAA03B1E1FF3280051B418 /* ASiOSAudioQueueHandler.h */,
+				05FAA03C1E1FF3280051B418 /* ASiOSAudioQueueHandler.m */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		973BB662158AD07000A7D459 = {
 			isa = PBXGroup;
 			children = (
@@ -220,6 +274,7 @@
 		97B9CFEA158AD09B0085BC63 /* AudioStreamer */ = {
 			isa = PBXGroup;
 			children = (
+				05DCD5AD1D749A89008BDCC2 /* Components */,
 				97B9D007158AD12F0085BC63 /* AudioStreamer.h */,
 				97B9D008158AD12F0085BC63 /* AudioStreamer.m */,
 				FA99E25115E4B6E1005AB6E6 /* ASPlaylist.h */,
@@ -321,8 +376,14 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05DCD5C11D75FAA4008BDCC2 /* ASAudioQueueHandler.h in Headers */,
 				97B9D009158AD12F0085BC63 /* AudioStreamer.h in Headers */,
+				05F859EC1E1D53CE000AE8A7 /* ASInternal.h in Headers */,
+				05DCD5B01D749BE3008BDCC2 /* ASCFReadStreamHandler.h in Headers */,
+				05DCD5BC1D74B97B008BDCC2 /* ASAudioFileStreamHandler.h in Headers */,
 				FA99E25315E4B6E1005AB6E6 /* ASPlaylist.h in Headers */,
+				05FAA0401E20140F0051B418 /* ASProxyInformation.h in Headers */,
+				05DCD5B71D74AACB008BDCC2 /* ASLogger.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,9 +541,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05FAA0431E202F520051B418 /* ASInternal.m in Sources */,
+				05DCD5B21D749BE3008BDCC2 /* ASCFReadStreamHandler.m in Sources */,
+				05DCD5BE1D74B97B008BDCC2 /* ASAudioFileStreamHandler.m in Sources */,
+				05DCD5C31D75FAA4008BDCC2 /* ASAudioQueueHandler.m in Sources */,
 				0595FA0A1A36FA9100AE7040 /* iOSStreamer.m in Sources */,
 				4965F2FE1824D48A00EF8875 /* AudioStreamer.m in Sources */,
+				05FAA0421E20140F0051B418 /* ASProxyInformation.m in Sources */,
 				4965F2FF1824D48A00EF8875 /* ASPlaylist.m in Sources */,
+				05DCD5B91D74AACB008BDCC2 /* ASLogger.m in Sources */,
+				05FAA03D1E1FF3280051B418 /* ASiOSAudioQueueHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,7 +559,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				97B9D00A158AD12F0085BC63 /* AudioStreamer.m in Sources */,
+				05DCD5B81D74AACB008BDCC2 /* ASLogger.m in Sources */,
+				05DCD5BD1D74B97B008BDCC2 /* ASAudioFileStreamHandler.m in Sources */,
+				05FAA0411E20140F0051B418 /* ASProxyInformation.m in Sources */,
+				05DCD5C21D75FAA4008BDCC2 /* ASAudioQueueHandler.m in Sources */,
+				05DCD5B11D749BE3008BDCC2 /* ASCFReadStreamHandler.m in Sources */,
 				FA99E25415E4B6E1005AB6E6 /* ASPlaylist.m in Sources */,
+				05FAA0391E1F23B10051B418 /* ASInternal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -107,7 +107,7 @@ NSString * const ASAttemptingNewSong = @"ASAttemptingNewSong";
        opportunity to hit a button to retry this specific connection so we can
        at least hope to regain our current place in the song */
     NSInteger code = [[sender error] code];
-    if (code == AS_NETWORK_CONNECTION_FAILED || code == AS_TIMED_OUT) {
+    if (code == ASReadStreamNetworkConnectionFailed || code == ASReadStreamTimedOut) {
       [[NSNotificationCenter defaultCenter]
             postNotificationName:ASStreamError
                           object:self];
@@ -186,7 +186,7 @@ NSString * const ASAttemptingNewSong = @"ASAttemptingNewSong";
 }
 
 - (BOOL)isError {
-  return [stream doneReason] == AS_DONE_ERROR;
+  return [stream doneReason] == ASDoneError;
 }
 
 - (BOOL)progress:(double*)ret {
@@ -201,7 +201,7 @@ NSString * const ASAttemptingNewSong = @"ASAttemptingNewSong";
   assert(!nexting);
   nexting = YES;
   lastKnownSeekTime = 0;
-  retrying = FALSE;
+  retrying = NO;
   [self stop];
   [self play];
   nexting = NO;

@@ -22,209 +22,14 @@
 //
 
 /* This file has been heavily modified since its original distribution by
- * Alex Crichton for the Hermes project */
+ * Alex Crichton for the Hermes project and Bo Anderson */
 
 #import <AudioToolbox/AudioToolbox.h>
 #import <Foundation/Foundation.h>
-
-/* Maximum number of packets which can be contained in one buffer */
-#define kAQMaxPacketDescs 512
-
-/**
- * The state that the streamer is in.
- *
- * This only used internally but subclasses may use this.
- *
- * The <[AudioStreamer isPlaying]>, <[AudioStreamer isPaused]>, <[AudioStreamer isDone]>
- * (and <[AudioStreamer doneReason]>) and <[AudioStreamer isWaiting]> methods cover these
- * states.
- */
-typedef NS_ENUM(NSUInteger, AudioStreamerState) {
-  /**
-   * The streamer has just been created and is waiting to start
-   */
-  AS_INITIALIZED = 0,
-  /**
-   * The streamer is waiting for enough data before playing
-   */
-  AS_WAITING_FOR_DATA,
-  /**
-   * The streamer is waiting for the audio queue (player) to start
-   */
-  AS_WAITING_FOR_QUEUE_TO_START,
-  /**
-   * The streamer is playing
-   */
-  AS_PLAYING,
-  /**
-   * The streamer is paused
-   */
-  AS_PAUSED,
-  /**
-   * The streamer is done. Call <[AudioStreamer doneReason]> for a reason
-   */
-  AS_DONE,
-  /**
-   * The streamer has been stopped by the <[AudioStreamer stop]> method
-   */
-  AS_STOPPED
-};
-
-/**
- * Error codes that the streamer could throw.
- *
- * These are mainly used internally but can be used for comparison with
- * the <[AudioStreamer error]> property.
- *
- * ```
- * if ([[streamer error] code] == AS_NETWORK_CONNECTION_FAILED)
- * {
- *     // Retry
- * }
- * ```
- */
-typedef NS_ENUM(NSInteger, AudioStreamerErrorCode)
-{
-  /**
-   * The network connection to the stream has failed
-   */
-  AS_NETWORK_CONNECTION_FAILED = 1000,
-  /**
-   * The file stream threw an error when attempting to fetch a property
-   */
-  AS_FILE_STREAM_GET_PROPERTY_FAILED = 1001,
-  /**
-   * The file stream threw an error when attempting to set a property
-   */
-  AS_FILE_STREAM_SET_PROPERTY_FAILED = 1002,
-  /**
-   * The file stream threw an error when parsing the stream data
-   */
-  AS_FILE_STREAM_PARSE_BYTES_FAILED = 1004,
-  /**
-   * The file stream threw an error when opening
-   */
-  AS_FILE_STREAM_OPEN_FAILED = 1005,
-  /**
-   * No audio could be found in stream
-   */
-  AS_AUDIO_DATA_NOT_FOUND = 1007,
-  /**
-   * The audio queue (player) threw an error on creation
-   */
-  AS_AUDIO_QUEUE_CREATION_FAILED = 1008,
-  /**
-   * The audio queue (player) threw an error when allocating buffers
-   */
-  AS_AUDIO_QUEUE_BUFFER_ALLOCATION_FAILED = 1009,
-  /**
-   * The audio queue (player) threw an error when enqueuing buffers
-   */
-  AS_AUDIO_QUEUE_ENQUEUE_FAILED = 1010,
-  /**
-   * The audio queue (player) threw an error when adding a property listener
-   */
-  AS_AUDIO_QUEUE_ADD_LISTENER_FAILED = 1011,
-  /**
-   * The audio queue (player) threw an error on start
-   */
-  AS_AUDIO_QUEUE_START_FAILED = 1013,
-  /**
-   * The audio queue (player) threw an error on pause
-   */
-  AS_AUDIO_QUEUE_PAUSE_FAILED = 1014,
-  /**
-   * There was a mismatch in the audio queue's (player's) buffers.
-   * Perhaps you set <[AudioStreamer bufferCount]> while the stream was running?
-   */
-  AS_AUDIO_QUEUE_BUFFER_MISMATCH = 1015,
-  /**
-   * The audio queue (player) threw an error on stop
-   */
-  AS_AUDIO_QUEUE_STOP_FAILED = 1017,
-  /**
-   * The audio queue (player) threw an error while flushing
-   */
-  AS_AUDIO_QUEUE_FLUSH_FAILED = 1018,
-  /**
-   * The buffer size is too small. Try increasing <[AudioStreamer bufferSize]>
-   */
-  AS_AUDIO_BUFFER_TOO_SMALL = 1021,
-  /**
-   * The connection to the stream timed out
-   */
-  AS_TIMED_OUT = 1022
-};
-
-/**
- * Possible reasons of why the streamer is now done.
- */
-typedef NS_ENUM(NSInteger, AudioStreamerDoneReason) {
-  /**
-   * The streamer has ended with an error. Check <[AudioStreamer error]> for information
-   */
-  AS_DONE_ERROR = -1,
-  /**
-   * The streamer is not done
-   */
-  AS_NOT_DONE = 0,
-  /**
-   * The streamer was stopped through the <[AudioStreamer stop]> method
-   */
-  AS_DONE_STOPPED = 1,
-  /**
-   * The streamer has reached the end of the file
-   */
-  AS_DONE_EOF = 2
-};
-
-/**
- * Log levels. Used to filter out certain levels of logging.
- * 
- * Each level down the chain towards verbose will include the previous log levels.
- * For example, AS_LOG_LEVEL_WARN will include AS_LOG_LEVEL_ERROR and AS_LOG_LEVEL_FATAL.
- *
- * See <[AudioStreamer logLevel]> for more information.
- */
-typedef NS_ENUM(NSUInteger, AudioStreamerLogLevel) {
-	/**
-	 * No logging will occur.
-	 */
-	AS_LOG_LEVEL_NONE = 0,
-	/**
-	 * Logging will only occur in the event of a fatal error such as an assertion.
-	 */
-	AS_LOG_LEVEL_FATAL,
-	/**
-	 * Logging will occur when the streamer encounters a error that has caused the streamer
-	 * to stop.
-	 */
-	AS_LOG_LEVEL_ERROR,
-	/**
-	 * Logging will occur when the streamer encounters an issue but not necessarily one that
-	 * has resulted in the streamer having to stop.
-	 */
-	AS_LOG_LEVEL_WARN,
-	/**
-	 * Logging will occur when the streamer has reached a point of interest in its streaming.
-	 */
-	AS_LOG_LEVEL_INFO,
-	/**
-	 * Logging will occur when the streamer has information that may be useful when debugging
-	 * the streamer.
-	 */
-	AS_LOG_LEVEL_DEBUG,
-	/**
-	 * Logging will occur at most steps in the streamer's process. Expect a lot of logs!
-	 */
-	AS_LOG_LEVEL_VERBOSE
-};
-
-enum AudioStreamerProxyType : NSUInteger;
-enum AudioStreamerID3ParserState : NSUInteger;
-struct buffer;
-struct queued_vbr_packet;
-struct queued_cbr_packet;
+#import "ASLogger.h"
+#import "ASCFReadStreamHandler.h"
+#import "ASAudioFileStreamHandler.h"
+#import "ASAudioQueueHandler.h"
 
 @class AudioStreamer;
 
@@ -349,98 +154,22 @@ struct queued_cbr_packet;
  * changed and a single audio stream cannot be re-used. To do this, multiple
  * AudioStreamer objects need to be created/managed.
  */
-@interface AudioStreamer : NSObject {
-  /* Properties specified before the stream starts. None of these properties
-   * should be changed after the stream has started or otherwise it could cause
-   * internal inconsistencies in the stream. Detail explanations of each
-   * property can be found in the source */
-  enum AudioStreamerProxyType proxyType; /* defaults to whatever the system says */
-  NSString        *proxyHost;
-  int             proxyPort;
+@interface AudioStreamer : NSObject
+{
+  ASCFReadStreamHandler *_readStreamHandler;
+  ASAudioFileStreamHandler *_fileStreamHandler;
+  ASAudioQueueHandler *_audioQueueHandler;
 
-  /* Created as part of the <start> method */
-  CFReadStreamRef stream;
+	ASProxyInformation *_proxyInfo;
 
-  /* Timeout management */
-  NSTimer *timeout; /* timer managing the timeout event */
-  bool unscheduled; /* flag if the http stream is unscheduled */
-  bool rescheduled; /* flag if the http stream was rescheduled */
-  int events;       /* events which have happened since the last tick */
-
-  /* Once the stream has bytes read from it, these are created */
-  AudioFileStreamID audioFileStream;
-
-  /* The audio file stream will fill in these parameters */
-  UInt64 fileLength;         /* length of file, set from http headers */
-  UInt64 dataOffset;         /* offset into the file of the start of stream */
-  UInt64 audioDataByteCount; /* number of bytes of audio data in file */
-
-  /* Once properties have been read, packets arrive, and the audio queue is
-   created once the first packet arrives */
-  AudioQueueRef audioQueue;
-  UInt32 packetBufferSize;   /* guessed from audioFileStream */
-
-  /* When receiving audio data, raw data is placed into these buffers. The
-   * buffers are essentially a "ring buffer of buffers" as each buffer is cycled
-   * through and then freed when not in use. Each buffer can contain one or many
-   * packets, so the packetDescs array is a list of packets which describes the
-   * data in the next pending buffer (used to enqueue data into the AudioQueue
-   * structure */
-  struct buffer **buffers; /* Information for each buffer */
-  AudioStreamPacketDescription packetDescs[kAQMaxPacketDescs];
-  UInt32 packetsFilled;         /* number of valid entries in packetDescs */
-  UInt32 bytesFilled;           /* bytes in use in the pending buffer */
-  unsigned int fillBufferIndex; /* index of the pending buffer */
-  UInt32 buffersUsed;           /* Number of buffers in use */
-
-  /* cache state (see above description) */
-  bool waitingOnBuffer;
-  struct queued_vbr_packet *queued_vbr_head;
-  struct queued_vbr_packet *queued_vbr_tail;
-  struct queued_cbr_packet *queued_cbr_head;
-  struct queued_cbr_packet *queued_cbr_tail;
-
-  /* Internal metadata about state */
-  AudioStreamerState state_;
-
-  /* ID3 support */
-  enum AudioStreamerID3ParserState id3ParserState;
-
-  /* ICY stream metadata */
-  bool   icyStream;           /* Is this an ICY stream? */
-  bool   icyChecked;          /* Have we already checked if this is an ICY stream? */
-  bool   icyHeadersParsed;    /* Are all the ICY headers parsed? */
-  int    icyMetaInterval;     /* The interval between ICY metadata bytes */
-  UInt16 icyMetaBytesRemaining;     /* How many bytes of ICY metadata are left? */
-  int    icyDataBytesRead;    /* How many data bytes have been read in an ICY stream since metadata? */
-  NSMutableString *icyMetadata;     /* The string of metadata itself, as it is being read */
-  double icyBitrate;          /* The bitrate of the ICY stream */
-
-  /* Miscellaneous metadata */
-  bool   discontinuous;      /* flag to indicate the middle of a stream */
-  UInt64 seekByteOffset;     /* position with the file to seek */
-  bool   seekable;           /* Does the stream accept the range header? */
-  double seekTime;
-  bool   seeking;            /* Are we currently in the process of seeking? */
-  double lastProgress;       /* last calculated progress point */
-  UInt32 processedPacketsCount;     /* bit rate calculation utility */
-  UInt64 processedPacketsSizeTotal; /* helps calculate the bit rate */
-  bool   bitrateNotification;       /* notified that the bitrate is ready */
-  bool   isParsing;           /* Are we parsing the file stream? */
-  UInt64 totalAudioPackets;   /* Total number of audio packets expected */
-  bool   vbr;                 /* Are we playing a VBR stream? */
-  bool   didConnect;          /* Did we connect successfully at some point? */
-  bool   queuePaused;         /* Is the audio queue paused? */
-  bool   bitrateEstimated;    /* Was the last bitrate calculation an estimate? */
-  bool   defaultBufferSizeUsed;     /* Was the default buffer size used? */
-  UInt64 audioBytesReceived;  /* The total number of audio bytes we have received so far */
-  UInt64 audioPacketsReceived;    /* The total number of audio packets we have received so far */
+	BOOL _started;
+  BOOL _bitrateEstimated; /* Was the last bitrate calculation an estimate? */
 }
 
 /** @name Creating an audio stream */
 
 /**
- * @brief Allocate a new audio stream with the specified url
+ * @brief Initialize a new audio stream with the specified url
  *
  * @details The created stream has not started playback. This gives an opportunity to
  * configure the rest of the stream as necessary. To start playback, send the
@@ -449,7 +178,19 @@ struct queued_cbr_packet;
  * @param url The remote source of audio
  * @return The stream to configure and being playback with
  */
-+ (instancetype)streamWithURL:(NSURL*)url;
+- (instancetype)initWithURL:(NSURL *)url;
+
+/**
+ * @brief Allocate and initialize a new audio stream with the specified url
+ *
+ * @details The created stream has not started playback. This gives an opportunity to
+ * configure the rest of the stream as necessary. To start playback, send the
+ * stream an explicit <start> message.
+ *
+ * @param url The remote source of audio
+ * @return The stream to configure and being playback with
+ */
++ (instancetype)streamWithURL:(NSURL *)url;
 
 /** @name Properties of the audio stream */
 
@@ -501,11 +242,11 @@ struct queued_cbr_packet;
  * @brief Returns the reason that the streamer is done
  *
  * @details When isDone returns true, this will return the reason that the stream has
- * been flagged as being done. AS_NOT_DONE will be returned otherwise.
+ * been flagged as being done. ASNotDone will be returned otherwise.
  *
- * @see AudioStreamerDoneReason
+ * @see ASDoneReason
  */
-@property (nonatomic, readonly) AudioStreamerDoneReason doneReason;
+@property (nonatomic, readonly) ASDoneReason doneReason;
 
 /**
  * @brief Returns whether the stream can be seeked with the <seekToTime:> method
@@ -613,7 +354,7 @@ struct queued_cbr_packet;
  * <bufferCount> above to make sure that the audio stays responsive and slightly
  * behind the HTTP stream
  *
- * Default: 4096
+ * Default: 8192
  */
 @property (readwrite) UInt32 bufferSize;
 
@@ -699,12 +440,12 @@ struct queued_cbr_packet;
 /**
  * @brief The log level to use
  *
- * @details Default: AS_LOG_LEVEL_INFO on debug builds; AS_LOG_LEVEL_ERROR on
- * release builds.
+ * @details Default: ASLogLevelInfo on debug builds; ASLogLevelError on release
+ * builds.
  *
- * @see AudioStreamerLogLevel
+ * @see ASLogLevel
  */
-@property (readwrite) AudioStreamerLogLevel logLevel;
+@property (readwrite) ASLogLevel logLevel;
 
 /**
  * @brief A callback to override the logging in AudioStreamer.
@@ -714,7 +455,11 @@ struct queued_cbr_packet;
  *
  * Default: nil
  */
-@property (readwrite, copy) void (^logHandler)(NSString *msg);
+@property (readwrite, copy) ASLogHandler logHandler;
+
+@property (readwrite) Class readStreamHandlerClass;
+@property (readwrite) Class fileStreamHandlerClass;
+@property (readwrite) Class audioQueueHandlerClass;
 
 /**
  * @brief Set an HTTP proxy for this stream
@@ -722,7 +467,7 @@ struct queued_cbr_packet;
  * @param host The address/hostname of the remote host
  * @param port The port of the proxy
  */
-- (void)setHTTPProxy:(NSString*)host port:(int)port;
+- (void)setHTTPProxy:(NSString *)host port:(uint16_t)port;
 
 /**
  * @brief Set SOCKS proxy for this stream
@@ -730,7 +475,7 @@ struct queued_cbr_packet;
  * @param host The address/hostname of the remote host
  * @param port The port of the proxy
  */
-- (void)setSOCKSProxy:(NSString*)host port:(int)port;
+- (void)setSOCKSProxy:(NSString *)host port:(uint16_t)port;
 
 /** @name Management of the stream */
 
@@ -751,8 +496,7 @@ struct queued_cbr_packet;
  * from occurring.
  *
  * @details This method may be invoked at any time from any point of the audio stream as
- * a signal of error happening. This method sets the state to AS_STOPPED if it
- * isn't already AS_STOPPED or AS_DONE.
+ * a signal of error happening.
  */
 - (void)stop;
 
@@ -760,14 +504,14 @@ struct queued_cbr_packet;
  * @brief Pause the audio stream if playing
  *
  * @return YES if the audio stream was paused, or NO if it was not in the
- *         AS_PLAYING state or an error occurred.
+ *         playing state or an error occurred.
  */
 - (BOOL)pause;
 
 /**
  * @brief Plays the audio stream if paused
  *
- * @return YES if the audio stream entered into the AS_PLAYING state, or NO if
+ * @return YES if the audio stream entered into the playing state, or NO if
  *         any other error or bad state was encountered.
  */
 - (BOOL)play;
@@ -813,7 +557,7 @@ struct queued_cbr_packet;
  * @return YES if the bit rate could be calculated with a high degree of
  *         certainty, or NO if it could not be.
  */
-- (BOOL)calculatedBitRate:(double*)ret;
+- (BOOL)calculatedBitRate:(double *)ret;
 
 /**
  * @brief Attempt to set the volume on the audio queue
@@ -837,7 +581,7 @@ struct queued_cbr_packet;
  *         could not be determined. In the NO case, the contents of ret are
  *         undefined
  */
-- (BOOL)duration:(double*)ret;
+- (BOOL)duration:(double *)ret;
 
 /**
  * @brief Calculate the progress into the stream, in seconds
@@ -850,7 +594,7 @@ struct queued_cbr_packet;
  * @return YES if the progress of the stream was determined, or NO if the
  *         progress could not be determined at this time
  */
-- (BOOL)progress:(double*)ret;
+- (BOOL)progress:(double *)ret;
 
 /**
  * @brief Calculate the buffer progress into the stream, in seconds
@@ -864,7 +608,7 @@ struct queued_cbr_packet;
  * @return YES if the buffer progress of the stream was determined, or NO if the buffer
  *         progress could not be determined at this time
  */
-- (BOOL)bufferProgress:(double*)ret;
+- (BOOL)bufferProgress:(double *)ret;
 
 /**
  * @brief Fade in playback
