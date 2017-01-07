@@ -723,7 +723,7 @@ static void ASAudioQueueIsRunningCallback(void *inUserData, AudioQueueRef inAQ, 
 {
     if (_processedPacketsCount > kBitRateEstimationMinPackets)
     {
-        double averagePacketByteSize = _processedPacketsSizeTotal / _processedPacketsCount;
+        double averagePacketByteSize = _processedPacketsSizeTotal / (double)_processedPacketsCount;
         /* bits/byte x bytes/packet x packets/sec = bits/sec */
         *rate = averagePacketByteSize;
         return YES;
