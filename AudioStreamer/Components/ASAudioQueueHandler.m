@@ -794,26 +794,25 @@ static void ASAudioQueueIsRunningCallback(void *inUserData, AudioQueueRef inAQ, 
     }
     else
     {
-        size_t offset = 0;
-        while (inNumberBytes && !_waitingOnBuffer && _queued_cbr_head == NULL)
+        UInt32 packetSize = (inNumberBytes / inNumberPackets);
+        UInt32 i;
+        for (i = 0; i < inNumberPackets && !_waitingOnBuffer && _queued_cbr_head == NULL; i++)
         {
-            size_t copySize;
-            int ret = [self processCBRPacket:(inInputData + offset)
-                                    byteSize:inNumberBytes
-                                    copySize:&copySize];
+            int ret = [self processCBRPacket:(inInputData + (packetSize * i))
+                                    byteSize:packetSize];
             if (ret < 0)
             {
                 [self failWithErrorCode:ASAudioQueueEnqueueFailed];
                 return;
             }
             if (ret == 0) break;
-            inNumberBytes -= copySize;
-            offset += copySize;
         }
-        while (inNumberBytes) {
+        if (i == inNumberPackets) return;
+
+        for (; i < inNumberPackets; i++)
+        {
             /* Allocate the packet */
-            size_t size = MIN(_bufferSize - _bytesFilled, inNumberBytes);
-            queued_cbr_packet_t *packet = malloc(sizeof(queued_cbr_packet_t) + size);
+            queued_cbr_packet_t *packet = malloc(sizeof(queued_cbr_packet_t) + packetSize);
             if (packet == NULL)
             {
                 [self failWithErrorCode:ASAudioQueueEnqueueFailed];
@@ -822,8 +821,8 @@ static void ASAudioQueueIsRunningCallback(void *inUserData, AudioQueueRef inAQ, 
 
             /* Prepare the packet */
             packet->next = NULL;
-            packet->byteSize = inNumberBytes;
-            memcpy(packet->data, inInputData + offset, size);
+            packet->byteSize = packetSize;
+            memcpy(packet->data, inInputData + (packetSize * i), packetSize);
 
             if (_queued_cbr_head == NULL)
             {
@@ -834,9 +833,6 @@ static void ASAudioQueueIsRunningCallback(void *inUserData, AudioQueueRef inAQ, 
                 _queued_cbr_tail->next = packet;
                 _queued_cbr_tail = packet;
             }
-
-            inNumberBytes -= size;
-            offset += size;
         }
     }
 }
@@ -894,7 +890,7 @@ static void ASAudioQueueIsRunningCallback(void *inUserData, AudioQueueRef inAQ, 
     return 1;
 }
 
-- (int)processCBRPacket:(const void *)data byteSize:(UInt32)byteSize copySize:(size_t *)copySize
+- (int)processCBRPacket:(const void *)data byteSize:(UInt32)byteSize
 {
     assert(_audioQueue != NULL);
 
@@ -908,15 +904,12 @@ static void ASAudioQueueIsRunningCallback(void *inUserData, AudioQueueRef inAQ, 
         assert(_bytesFilled == 0);
     }
 
-    bufSpaceRemaining = _bufferSize - _bytesFilled;
-    *copySize = MIN(bufSpaceRemaining, byteSize);
-
     AudioQueueBufferRef buf = _buffers[_fillBufferIndex]->ref;
-    memcpy(buf->mAudioData + _bytesFilled, data, *copySize);
+    memcpy(buf->mAudioData + _bytesFilled, data, byteSize);
 
-    _bytesFilled += *copySize;
-    _packetsFilled += *copySize;
-    _processedPacketsCount += *copySize;
+    _bytesFilled += byteSize;
+    _packetsFilled += byteSize;
+    _processedPacketsCount += byteSize;
 
     _buffers[_fillBufferIndex]->packetStart = _processedPacketsCount;
 
@@ -1017,8 +1010,7 @@ static void ASAudioQueueIsRunningCallback(void *inUserData, AudioQueueRef inAQ, 
     {
         if (_queued_cbr_head != NULL)
         {
-            size_t copySize;
-            int ret = [self processCBRPacket:_queued_cbr_head->data byteSize:_queued_cbr_head->byteSize copySize:&copySize];
+            int ret = [self processCBRPacket:_queued_cbr_head->data byteSize:_queued_cbr_head->byteSize];
             if (ret < 0) {
                 [self failWithErrorCode:ASAudioQueueEnqueueFailed];
                 return;
