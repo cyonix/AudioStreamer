@@ -424,7 +424,8 @@ static void ASPropertyListenerProc(void *inClientData, AudioFileStreamID inAudio
                 break;
             }
             
-            for (UInt32 i = 0; i * sizeof(AudioFormatListItem) < formatListSize; i += sizeof(AudioFormatListItem)) {
+            for (UInt32 i = 0; i * sizeof(AudioFormatListItem) < formatListSize; i++)
+            {
                 AudioStreamBasicDescription pasbd = formatList[i].mASBD;
                 
                 if (pasbd.mFormatID == kAudioFormatMPEG4AAC_HE || pasbd.mFormatID == kAudioFormatMPEG4AAC_HE_V2)
