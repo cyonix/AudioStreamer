@@ -565,13 +565,14 @@ static void ASReadStreamCallback(CFReadStreamRef aStream, CFStreamEventType even
             id3TagSize = ((bytes[6] & 0x7F) << 21) | ((bytes[7] & 0x7F) << 14) |
                             ((bytes[8] & 0x7F) << 7) | (bytes[9] & 0x7F);
 
-            if (length < id3TagSize) {
+            if ((length - 10) < id3TagSize)
+            {
                 ASLogWarn(@"Not enough data received to parse ID3.");
                 _id3ParserState = ASID3StateParsed;
                 break;
             }
-
-            if (id3TagSize > 0) {
+            else
+            {
                 if (id3Version <= 3 && (id3FlagInfo & ASID3FlagUnsync)) {
                     for (int pos = 10, last = 0, i = 0; pos < (id3TagSize + 10); pos++) {
                         UInt8 byte = bytes[pos];
