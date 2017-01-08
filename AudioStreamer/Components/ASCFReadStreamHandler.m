@@ -563,7 +563,7 @@ static void ASReadStreamCallback(CFReadStreamRef aStream, CFStreamEventType even
             }
 
             id3TagSize = ((bytes[6] & 0x7F) << 21) | ((bytes[7] & 0x7F) << 14) |
-            ((bytes[8] & 0x7F) << 7) | (bytes[9] & 0x7F);
+                            ((bytes[8] & 0x7F) << 7) | (bytes[9] & 0x7F);
 
             if (length < id3TagSize) {
                 ASLogWarn(@"Not enough data received to parse ID3.");
@@ -573,7 +573,7 @@ static void ASReadStreamCallback(CFReadStreamRef aStream, CFStreamEventType even
 
             if (id3TagSize > 0) {
                 if (id3Version <= 3 && (id3FlagInfo & ASID3FlagUnsync)) {
-                    for (int pos = 10, last = 0, i = 0; pos < id3TagSize; pos++) {
+                    for (int pos = 10, last = 0, i = 0; pos < (id3TagSize + 10); pos++) {
                         UInt8 byte = bytes[pos];
                         if (last != 0xFF || byte != 0) {
                             syncedBytes[i++] = byte;
@@ -581,7 +581,7 @@ static void ASReadStreamCallback(CFReadStreamRef aStream, CFStreamEventType even
                         last = byte;
                     }
                 } else {
-                    for (int pos = 10, i = 0; pos < id3TagSize; pos++, i++) {
+                    for (int pos = 10, i = 0; i < id3TagSize; pos++, i++) {
                         syncedBytes[i] = bytes[pos];
                     }
                 }
@@ -620,7 +620,7 @@ static void ASReadStreamCallback(CFReadStreamRef aStream, CFStreamEventType even
             NSString *id3Title;
             NSString *id3Artist;
 
-            while ((pos + 10) < id3TagSize) {
+            while (pos < id3TagSize) {
                 int startPos = pos;
 
                 int frameSize;
