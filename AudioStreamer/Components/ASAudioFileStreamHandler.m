@@ -413,7 +413,10 @@ static void ASPropertyListenerProc(void *inClientData, AudioFileStreamID inAudio
 
             AudioFormatListItem *formatList = malloc(formatListSize);
             if (formatList == NULL)
+            {
                 [self failWithErrorCode:ASFileStreamGetPropertyFailed];
+                break;
+            }
 
             osErr = AudioFileStreamGetProperty(inAudioFileStream,
                                                kAudioFileStreamProperty_FormatList,
