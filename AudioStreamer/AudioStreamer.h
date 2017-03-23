@@ -258,6 +258,14 @@ struct queued_cbr_packet;
  * @see [AudioStreamer calculatedBitRate:]
  */
 - (void)streamerBitrateIsReady:(AudioStreamer *)sender;
+/**
+ * @brief Called when the stream has metadata (song info)
+ *
+ * @param sender The streamer that called this method
+ *
+ * @see [AudioStreamer currentSong]
+ */
+- (void)streamerMetadataIsReady:(AudioStreamer *)sender;
 
 @end
 

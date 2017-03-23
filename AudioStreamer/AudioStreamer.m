@@ -291,6 +291,17 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
   return seekable && [self duration:&tmp] && [self calculatedBitRate:&tmp] && tmp != 0.0;
 }
 
+- (void)setCurrentSong:(NSString *)currentSong {
+  _currentSong = currentSong;
+  if (!_currentSong) {
+    return;
+  }
+  __strong id <AudioStreamerDelegate> delegate = _delegate;
+  if (delegate && [delegate respondsToSelector:@selector(streamerMetadataIsReady:)]) {
+    [delegate streamerMetadataIsReady:self];
+  }
+}
+
 - (BOOL)start {
   if (stream != NULL) return NO;
   assert(audioQueue == NULL);
@@ -1143,7 +1154,7 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
   icyDataBytesRead = 0;
   icyHeadersParsed = false;
   icyMetadata = [NSMutableString string];
-  _currentSong = nil;
+  [self setCurrentSong:nil];
 
   /* When seeking to a time within the stream, we both already know the file
      length and the seekByteOffset will be set to know what to send to the
@@ -1498,7 +1509,7 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
 
               LOG_INFO(@"ICY stream title (current song): %@", value);
 
-              _currentSong = value;
+              [self setCurrentSong:value];
             }
             icyDataBytesRead = 0;
           }
@@ -1793,15 +1804,17 @@ static void ASReadStreamCallBack(CFReadStreamRef aStream, CFStreamEventType even
         pos += frameSize;
       }
 
+      NSString *currSong = nil;
       if (id3Title && id3Artist) {
-        _currentSong = [NSString stringWithFormat:@"%@ - %@", id3Artist, id3Title];
+        currSong = [NSString stringWithFormat:@"%@ - %@", id3Artist, id3Title];
       } else if (id3Title) {
-        _currentSong = [NSString stringWithFormat:@"Unknown Artist - %@", id3Title];
+        currSong = [NSString stringWithFormat:@"Unknown Artist - %@", id3Title];
       } else if (id3Artist) {
-        _currentSong = [NSString stringWithFormat:@"%@ - Unknown Title", id3Artist];
+        currSong = [NSString stringWithFormat:@"%@ - Unknown Title", id3Artist];
       }
 
-      LOG_INFO(@"ID3 Current Song: %@", _currentSong);
+      [self setCurrentSong:currSong];
+      LOG_INFO(@"ID3 Current Song: %@", currSong);
 
       id3ParserState = ID3_STATE_PARSED;
       break;

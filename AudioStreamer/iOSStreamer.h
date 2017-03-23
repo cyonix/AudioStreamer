@@ -6,7 +6,7 @@
 //
 
 #import "AudioStreamer.h"
-#import <AVFoundation/AVAudioSession.h>
+#import <AVFoundation/AVFoundation.h>
 
 @class iOSStreamer;
 
