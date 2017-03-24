@@ -20,6 +20,8 @@
 		05A1D5921A8BCC6700FE0BA4 /* NSBufferSliderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A1D5911A8BCC6700FE0BA4 /* NSBufferSliderCell.m */; };
 		4965F2FE1824D48A00EF8875 /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B9D008158AD12F0085BC63 /* AudioStreamer.m */; };
 		4965F2FF1824D48A00EF8875 /* ASPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = FA99E25215E4B6E1005AB6E6 /* ASPlaylist.m */; };
+		5A5003DC1E84B2490072EA04 /* ASPlaylist.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = FA99E25115E4B6E1005AB6E6 /* ASPlaylist.h */; };
+		5A5003DD1E84B24B0072EA04 /* AudioStreamer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 97B9D007158AD12F0085BC63 /* AudioStreamer.h */; };
 		97B9D009158AD12F0085BC63 /* AudioStreamer.h in Headers */ = {isa = PBXBuildFile; fileRef = 97B9D007158AD12F0085BC63 /* AudioStreamer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		97B9D00A158AD12F0085BC63 /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B9D008158AD12F0085BC63 /* AudioStreamer.m */; };
 		97B9D00E158AD1DF0085BC63 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97B9D00C158AD16C0085BC63 /* AudioToolbox.framework */; };
@@ -68,9 +70,11 @@
 		4965F2D71824D40700EF8875 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
+			dstPath = include;
 			dstSubfolderSpec = 16;
 			files = (
+				5A5003DC1E84B2490072EA04 /* ASPlaylist.h in CopyFiles */,
+				5A5003DD1E84B24B0072EA04 /* AudioStreamer.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

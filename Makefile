@@ -12,9 +12,18 @@ framework:
 mac:
 	$(XCB) $(XCBFLAGS) -target 'Mac Streaming Player'
 
-iphonelib: XCBFLAGS += -sdk iphoneos
-iphonelib:
-	$(XCB) $(XCBFLAGS) -target 'libAudioStreamer'
+iphonelibios: 
+	$(XCB) $(XCBFLAGS) -sdk iphoneos -target 'libAudioStreamer'
+
+iphonelibsim: 
+	$(XCB) $(XCBFLAGS) -sdk iphonesimulator -target 'libAudioStreamer'
+
+iphonelib: iphonelibios iphonelibsim
+	rm -rf build/Release-fat 
+	mkdir build/Release-fat
+	lipo build/Release-iphoneos/libAudioStreamer.a build/Release-iphonesimulator/libAudioStreamer.a \
+		-create -output build/Release-fat/libAudioStreamer.a
+	cp -rf build/Release-iphoneos/include build/Release-fat
 
 iphone: XCBFLAGS += -sdk iphoneos
 iphone:
